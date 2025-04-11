@@ -7,6 +7,37 @@
     <title>Tallpyramide</title>
 </head>
 <body>
+    <header>
+        <h1>Tallpyramide</h1>
+    </header>
+    <main>
+        <div id="instillingsboks">
+            <h2>Instillinger</h2>
+            <div id="alternativer">
+                <div>
+                    <label for="start-slider">Start</label>
+                    <input type="range" min="0" max="98" id="start-slider">
+                    <p>Verdi til slider</p>
+                </div>
+                <div>
+                    <!-- Legg på eventListener som gjør at man ikke kan ha laere slutt enn start -->
+                    <label for="slutt-slider">Slutt</label>
+                    <input type="range" min="1" max="99" id="slutt-slider">
+                    <p>Verdi til slider</p>
+                </div>
+                <div>
+                    <label for="rader-slider">Rader</label>
+                    <input type="range" min="2" max="10">
+                    <p>Verdi til slider</p>
+                </div>
+                <div>
+                    <label for="farge-velger">Farge</label>
+                    <input type="color" value="#abcdef" id="farge-velger">
+                </div>
+            </div>
+            <button id="start-knapp">Start</button>
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
