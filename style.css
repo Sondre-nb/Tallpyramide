@@ -22,11 +22,6 @@ main{
     background-color: #FFEAEC;
 }
 
-#alternativer{
-    display: flex;
-    flex-direction: row;
-}
-
 #instillingsboks{
     width: 80%;
     height: 60%;
@@ -36,4 +31,36 @@ main{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+#instillingsboks > h2{
+    flex-grow: 1;
+    font-size: 32px;
+    margin-top: 10px;
+}
+
+#alternativer{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+#alternativer > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 25px;
+}
+
+input, label, p{
+    margin: 5px;
+}
+
+#start-knapp{
+    padding: 7px 14px;
+    font-size: 20px;
+    border-radius: 0;
+    border: none;
+    background-color: #6DB1BF;
+    margin-bottom: 10px;
 }
