@@ -77,7 +77,7 @@ function lagPyramide(start, slutt, rader) {
 
 function fargelegg(plasseringer) {
     let rader = document.querySelectorAll("#pyramide > div")
-    for (let i = 0; i < tomPyramide.length; i++) {
+    for (let i = 0; i < pyramide.length; i++) {
         setTimeout(function () {
             let rute = rader[i].querySelectorAll("div")[plasseringer[i]]
             for (let j = 1; j<=100; j++){
