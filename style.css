@@ -15,10 +15,6 @@ header{
 }
 main{
     padding-top: 80px;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #FFEAEC;
 }
 
@@ -67,7 +63,7 @@ input, label, p{
 
 #main-container {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
             "h p s"
             "i p s"
             "t p s"
@@ -76,8 +72,8 @@ input, label, p{
     grid-template-rows: 1fr 1fr auto auto;
     gap: 5px;
     width: 100%;
-    height: 500px;  
-    padding-inline: 5px;      
+    height: 500px;
+    padding: 5px;
 }
 #main-container > div {
     background-color: aqua;
