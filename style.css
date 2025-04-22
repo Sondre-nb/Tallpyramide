@@ -123,5 +123,9 @@ input, label, p{
 }
 #statistikk-boks {
     background-color: white;
-    padding-inline: 25px;
+    padding: 10px;
+}
+#statistikk-boks ul{
+    padding-left: 20px;
+    list-style-type: square;
 }
