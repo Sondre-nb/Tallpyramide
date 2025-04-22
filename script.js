@@ -11,6 +11,7 @@
 design:
 - tabell eller liste med antall muligheter, høyeste verdi og laveste verdi, (gjennomsnitt???)
 - Sektordiagram med fordeling av ulike verdier (0-10, 10-20, osv.) (laveste verdi som start, høyeste som slutt, dele i x forskjelige kategorier mellom)
+- Søylediagram med iterasjoner
 */
 
 let startSliderEl = document.querySelector("#start-slider")

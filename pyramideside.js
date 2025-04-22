@@ -77,9 +77,16 @@ function lagPyramide(start, slutt, rader) {
 
 function fargelegg(plasseringer) {
     let rader = document.querySelectorAll("#pyramide > div")
-    for (let i = 0; i < pyramide.length; i++) {
-        let ruter = rader[i].querySelectorAll("div")
-        ruter[plasseringer[i]].setAttribute("class", "tallrute riktigrute")
+    for (let i = 0; i < tomPyramide.length; i++) {
+        setTimeout(function () {
+            let rute = rader[i].querySelectorAll("div")[plasseringer[i]]
+            for (let j = 1; j<=100; j++){
+                setTimeout(function(){
+                    rute.style.background = "linear-gradient(0deg,white " +(100-j)+"%, greenyellow "+(100-j)+"%)"
+                }, 5*j)
+            }
+            rute.style.background = "linear-gradient(0deg,white 85.6%, greenyellow 85.6%)"
+        }, 500*i)
     }
 }
 
