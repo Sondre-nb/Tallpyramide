@@ -1,56 +1,51 @@
 let plasseringer;
-let høyesteVerdi2 = 0;
+let høyesteVerdi = 0;
+let pyramide = []
+let sumPyramide = []
+let plassPyramide = []
+let pyramideEl = document.querySelector("#pyramide")
 
 function finnRute(plass, rad, verdi, plassering){
-    // console.log(plassering)
-    if (rad < tomPyramide.length - 1) {
-        finnRute(plass, rad+1, verdi + tomPyramide[rad][plass], plassering.concat([plass]))
-        finnRute(plass+1, rad+1, verdi + tomPyramide[rad][plass], plassering.concat([plass+1]))
+    if (rad < pyramide.length - 1) {
+        finnRute(plass, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass]))
+        finnRute(plass+1, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass+1]))
     } else {
-        if (verdi + tomPyramide[rad][plass] > høyesteVerdi2) {
-            høyesteVerdi2 = verdi + tomPyramide[rad][plass]
+        if (verdi + pyramide[rad][plass] > høyesteVerdi) {
+            høyesteVerdi = verdi + pyramide[rad][plass]
             plasseringer = plassering
         }
     }
 }
 
-let høyesteVerdi3 = 0;
-
-function sjekkVerdi2(verdi, plassering) {
-    //console.log("j", plassering)
-    if (verdi > høyesteVerdi3) {
-        høyesteVerdi3 = verdi
+function sjekkVerdi(verdi, plassering) {
+    if (verdi > høyesteVerdi) {
+        høyesteVerdi = verdi
         plasseringer = plassering
     }
 }
 
 function finnRute2(plass, rad, verdi, plassering){
-    if (rad < tomPyramide.length - 1) {
-        if (tomSumPyramide[rad+1][plass] != 0 && tomSumPyramide[rad+1][plass+1] != 0) {
-            if (tomSumPyramide[rad+1][plass] > tomSumPyramide[rad+1][plass+1]) {
-                tomSumPyramide[rad][plass] = tomPyramide[rad][plass] + tomSumPyramide[rad+1][plass]
-                //console.log([plass].concat(tomPlassPyramide[rad+1][plass]))
-                tomPlassPyramide[rad][plass] = [plass].concat(tomPlassPyramide[rad+1][plass])
-                sjekkVerdi2(verdi + tomSumPyramide[rad+1][plass] + tomPyramide[rad][plass], plassering.concat(tomPlassPyramide[rad+1][plass]))
+    if (rad < pyramide.length - 1) {
+        if (sumPyramide[rad+1][plass] != 0 && sumPyramide[rad+1][plass+1] != 0) {
+            if (sumPyramide[rad+1][plass] > sumPyramide[rad+1][plass+1]) {
+                sumPyramide[rad][plass] = pyramide[rad][plass] + sumPyramide[rad+1][plass]
+                //console.log([plass].concat(plassPyramide[rad+1][plass]))
+                plassPyramide[rad][plass] = [plass].concat(plassPyramide[rad+1][plass])
+                sjekkVerdi(verdi + sumPyramide[rad+1][plass] + pyramide[rad][plass], plassering.concat(plassPyramide[rad+1][plass]))
             } else {
-                tomSumPyramide[rad][plass] = tomPyramide[rad][plass] + tomSumPyramide[rad+1][plass+1]
-                //console.log([plass].concat(tomPlassPyramide[rad+1][plass+1]))
-                tomPlassPyramide[rad][plass] = [plass].concat(tomPlassPyramide[rad+1][plass+1])
-                sjekkVerdi2(verdi + tomSumPyramide[rad+1][plass+1] + tomPyramide[rad][plass], plassering.concat(tomPlassPyramide[rad+1][plass+1]))
+                sumPyramide[rad][plass] = pyramide[rad][plass] + sumPyramide[rad+1][plass+1]
+                //console.log([plass].concat(plassPyramide[rad+1][plass+1]))
+                plassPyramide[rad][plass] = [plass].concat(plassPyramide[rad+1][plass+1])
+                sjekkVerdi(verdi + sumPyramide[rad+1][plass+1] + pyramide[rad][plass], plassering.concat(plassPyramide[rad+1][plass+1]))
             }
         } else {
-            finnRute2(plass, rad+1, verdi + tomPyramide[rad][plass], plassering.concat([plass]))
-            finnRute2(plass+1, rad+1, verdi + tomPyramide[rad][plass], plassering.concat([plass + 1]))
+            finnRute2(plass, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass]))
+            finnRute2(plass+1, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass + 1]))
         }
     } else {
-        sjekkVerdi2(verdi + tomPyramide[rad][plass], plassering)
+        sjekkVerdi(verdi + pyramide[rad][plass], plassering)
     }
 }
-
-let tomPyramide = []
-let tomSumPyramide = []
-let tomPlassPyramide = []
-let pyramideEl = document.querySelector("#pyramide")
 
 function lagPyramide(start, slutt, rader) {
     for (let i = 1; i <= rader; i++) {
@@ -73,31 +68,27 @@ function lagPyramide(start, slutt, rader) {
                 rad_sum_liste.push(tall)
             }
         }
-        tomPlassPyramide.push(rad_plass_liste)
-        tomSumPyramide.push(rad_sum_liste)
-        tomPyramide.push(rad_liste)
+        plassPyramide.push(rad_plass_liste)
+        sumPyramide.push(rad_sum_liste)
+        pyramide.push(rad_liste)
         pyramideEl.appendChild(rad)
     }
 }
 
 function fargelegg(plasseringer) {
     let rader = document.querySelectorAll("#pyramide > div")
-    for (let i = 0; i < tomPyramide.length; i++) {
+    for (let i = 0; i < pyramide.length; i++) {
         let ruter = rader[i].querySelectorAll("div")
         ruter[plasseringer[i]].setAttribute("class", "tallrute riktigrute")
     }
 }
 
 lagPyramide(1,10,10)
-
-console.log(tomPyramide)
-console.log(tomSumPyramide)
-console.log(tomPlassPyramide)
-
 finnRute2(0,0,0,[0])
-
-console.log(plasseringer)
-console.log(høyesteVerdi3)
-console.log(tomPlassPyramide)
-
 fargelegg(plasseringer)
+
+console.log(pyramide)
+console.log(sumPyramide)
+console.log(plassPyramide)
+console.log(plasseringer)
+console.log(høyesteVerdi)
