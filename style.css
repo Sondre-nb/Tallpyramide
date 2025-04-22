@@ -64,3 +64,64 @@ input, label, p{
     background-color: #6DB1BF;
     margin-bottom: 10px;
 }
+
+#main-container {
+    display: grid;
+    grid-template-areas: 
+            "h p s"
+            "i p s"
+            "t p s"
+            "m p s";
+    grid-template-columns: 1fr 50% 1fr;
+    grid-template-rows: 1fr 1fr auto auto;
+    gap: 5px;
+    width: 100%;
+    height: 500px;  
+    padding-inline: 5px;      
+}
+#main-container > div {
+    background-color: aqua;
+    padding: 5px;
+}
+#hastighet-graf {
+    grid-area: h;
+}
+#iterasjon-graf {
+    grid-area: i;
+}
+#tilbake {
+    grid-area: t;
+}
+#mer-om-algoritme {
+    grid-area: m;
+}
+#pyramide {
+    grid-area: p;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#pyramide > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#statistikk {
+    grid-area: s;
+}
+.tallrute {
+    margin: 5px;
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.riktigrute {
+    background-color: greenyellow;
+}
+#statistikk-boks {
+    background-color: white;
+    padding-inline: 25px;
+}
