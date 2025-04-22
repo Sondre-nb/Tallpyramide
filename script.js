@@ -34,3 +34,15 @@ displayVerdiRaderEl.innerHTML = raderSliderEl.value
 raderSliderEl.addEventListener("input", () => {
     displayVerdiRaderEl.innerHTML = raderSliderEl.value
 })
+
+startKnappEl = document.querySelector("#start-knapp")
+startKnappEl.addEventListener("click", knappetrykk)
+
+function knappetrykk(){
+    console.log("HEIIII")
+    if (startSliderEl.value >= sluttSliderEl.value){
+        // Du må gjøre ting ordentlig, endre slik at tall funker osv.
+    } else {
+        window.location.href = "pyramideside.html"
+    }
+}
