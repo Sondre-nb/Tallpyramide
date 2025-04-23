@@ -14,6 +14,9 @@ function finnRute(plass, rad, verdi, plassering){
             høyesteVerdi = verdi + pyramide[rad][plass]
             plasseringer = plassering
         }
+        if (verdi + pyramide[rad][plass] < minsteVerdi) {
+            minsteVerdi = verdi + pyramide[rad][plass]
+        }
     }
 }
 
@@ -90,8 +93,24 @@ function fargelegg(plasseringer) {
     }
 }
 
-lagPyramide(1,10,10)
-finnRute2(0,0,0,[0])
+let antall_rader = 7
+let intervall_topp = 10
+let minsteVerdi = antall_rader * intervall_topp
+
+lagPyramide(1,intervall_topp,antall_rader)
+// finnRute2(0,0,0,[0])
+finnRute(0,0,0,[0])
+
+
+let mulighet_tekst = document.querySelector("#antall-muligheter")
+mulighet_tekst.innerText += " " + 2**(antall_rader-1)
+
+let høyeste_sum_tekst = document.querySelector("#høyeste-sum")
+høyeste_sum_tekst.innerText += " " + høyesteVerdi
+
+let laveste_sum_tekst = document.querySelector("#laveste-sum")
+laveste_sum_tekst.innerText += " " + minsteVerdi
+
 fargelegg(plasseringer)
 
 console.log(pyramide)
