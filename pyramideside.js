@@ -1,9 +1,10 @@
 let plasseringer;
+let lavestePlasseringer;
 let høyesteVerdi = 0;
-let pyramide = []
-let sumPyramide = []
-let plassPyramide = []
-let pyramideEl = document.querySelector("#pyramide")
+let pyramide = [];
+let sumPyramide = [];
+let plassPyramide = [];
+let pyramideEl = document.querySelector("#pyramide");
 
 function finnRute(plass, rad, verdi, plassering){
     if (rad < pyramide.length - 1) {
@@ -11,11 +12,12 @@ function finnRute(plass, rad, verdi, plassering){
         finnRute(plass+1, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass+1]))
     } else {
         if (verdi + pyramide[rad][plass] > høyesteVerdi) {
-            høyesteVerdi = verdi + pyramide[rad][plass]
-            plasseringer = plassering
+            høyesteVerdi = verdi + pyramide[rad][plass];
+            plasseringer = plassering;
         }
         if (verdi + pyramide[rad][plass] < minsteVerdi) {
-            minsteVerdi = verdi + pyramide[rad][plass]
+            minsteVerdi = verdi + pyramide[rad][plass];
+            lavestePlasseringer = plassering;
         }
     }
 }
@@ -56,6 +58,7 @@ function lagPyramide(start, slutt, rader) {
         let rad_plass_liste = []
         let rad_sum_liste = []
         let rad = document.createElement("div")
+        rad.setAttribute("class", "pyramiderad")
         for (let j = 0; j < i; j++) {
             let tall = Math.floor(Math.random()*(slutt-start + 1)+start)
             let rute = document.createElement("div")
@@ -79,7 +82,7 @@ function lagPyramide(start, slutt, rader) {
 }
 
 function fargelegg(plasseringer) {
-    let rader = document.querySelectorAll("#pyramide > div")
+    let rader = document.querySelectorAll(".pyramiderad")
     for (let i = 0; i < pyramide.length; i++) {
         setTimeout(function () {
             let rute = rader[i].querySelectorAll("div")[plasseringer[i]]
@@ -93,14 +96,26 @@ function fargelegg(plasseringer) {
     }
 }
 
-let antall_rader = 7
+function byttSøk(e) {
+    let ruter = document.querySelectorAll(".tallrute")
+    for (let i = 0; i < ruter.length; i++) {
+        ruter[i].style.background = "white"
+    }
+    let valgtKnapp = e.target
+    if (valgtKnapp.id == "høyest") {
+        fargelegg(plasseringer)
+    } else {
+        fargelegg(lavestePlasseringer)
+    }
+}
+
+let antall_rader = 10
 let intervall_topp = 10
 let minsteVerdi = antall_rader * intervall_topp
 
 lagPyramide(1,intervall_topp,antall_rader)
 // finnRute2(0,0,0,[0])
 finnRute(0,0,0,[0])
-
 
 let mulighet_tekst = document.querySelector("#antall-muligheter")
 mulighet_tekst.innerText += " " + 2**(antall_rader-1)
@@ -110,6 +125,11 @@ høyeste_sum_tekst.innerText += " " + høyesteVerdi
 
 let laveste_sum_tekst = document.querySelector("#laveste-sum")
 laveste_sum_tekst.innerText += " " + minsteVerdi
+
+let søkKnapperEl = document.querySelectorAll(".søk-instilling-knapp")
+for (let i = 0; i < søkKnapperEl.length; i++) {
+    søkKnapperEl[i].addEventListener("change", byttSøk);
+}
 
 fargelegg(plasseringer)
 
