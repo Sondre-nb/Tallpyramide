@@ -259,9 +259,9 @@ function fraRGBListeTilHex(rgb){
     return hex
 }
 
-let antall_rader = 7//Number(localStorage.getItem("raderlagring"))
+let antall_rader = 4//Number(localStorage.getItem("raderlagring"))
 let intervall_bunn = 1//Number(localStorage.getItem("startlagring"))
-let intervall_topp = 10//Number(localStorage.getItem("sluttlagring"))
+let intervall_topp = 5//Number(localStorage.getItem("sluttlagring"))
 let farge = "greenyellow" //localStorage.getItem("fargelagring")
 
 let minsteVerdi = antall_rader * intervall_topp
