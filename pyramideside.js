@@ -78,6 +78,20 @@ function fiinnHoyesteVedLokke(pyr){
     return trekant[0][0]
 }
 
+function finnBesteSti(rad, index){
+    let sum = pyramide[rad][index]
+    if (rad < pyramide.length - 1){
+        let sum_venstre = finnBesteSti(rad+1, index)
+        let sum_hoyre = finnBesteSti(rad+1, index+1)
+        if (sum_venstre > sum_hoyre){
+            sum += sum_venstre
+        } else {
+            sum += sum_hoyre
+        }
+    }
+    return sum
+}
+
 function lagPyramide(start, slutt, rader) {
     for (let i = 1; i <= rader; i++) {
         let rad_liste = []
