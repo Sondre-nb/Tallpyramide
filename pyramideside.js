@@ -52,6 +52,30 @@ function finnRute2(plass, rad, verdi, plassering){
     }
 }
 
+function storste(a,b){
+    if (a > b){
+        return a
+    } else {
+        return b
+    }
+}
+
+function fiinnHoyesteVedLokke(pyr){
+    // Kopierer liste og ikke bare referansen siden den blir endret på
+    let trekant = []
+    for (let linje of pyr){
+        trekant.push(Array.from(linje))
+    }
+    //let iterasjoner = 0
+    for (let i = trekant.length-2;i>=0;i--){
+        for (let j = 0; j<trekant[i].length;j++){
+            //iterasjoner++
+            trekant[i][j] += storste(trekant[i+1][j], trekant[i+1][j+1])
+        }
+    }
+    return trekant[0][0]
+}
+
 function lagPyramide(start, slutt, rader) {
     for (let i = 1; i <= rader; i++) {
         let rad_liste = []
@@ -81,18 +105,29 @@ function lagPyramide(start, slutt, rader) {
     }
 }
 
+let animasjontimeouts = []
+
 function fargelegg(plasseringer) {
+    // Fjerner pågående animasjoner
+    for (let timeout of animasjontimeouts){
+        clearTimeout(timeout)
+    }
+    animasjontimeouts = []
+
     let rader = document.querySelectorAll(".pyramiderad")
     for (let i = 0; i < pyramide.length; i++) {
-        setTimeout(function () {
-            let rute = rader[i].querySelectorAll("div")[plasseringer[i]]
-            for (let j = 1; j<=100; j++){
-                setTimeout(function(){
-                    rute.style.background = "linear-gradient(0deg,white " +(100-j)+"%, greenyellow "+(100-j)+"%)"
-                }, 5*j)
-            }
-            rute.style.background = "linear-gradient(0deg,white 85.6%, greenyellow 85.6%)"
-        }, 500*i)
+        animasjontimeouts.push( // Legger til alle timeoutene i en liste slik at de kan bli fjernet midt i animasjonen
+            setTimeout(function () {
+                let rute = rader[i].querySelectorAll("div")[plasseringer[i]]
+                for (let j = 1; j<=100; j++){
+                    animasjontimeouts.push(
+                        setTimeout(function(){
+                            rute.style.background = "linear-gradient(0deg,white " +(100-j)+"%, greenyellow "+(100-j)+"%)"
+                        }, 5*j)
+                    )
+                }
+            }, 500*i)
+        )
     }
 }
 
