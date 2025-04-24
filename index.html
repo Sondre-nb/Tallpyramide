@@ -20,13 +20,13 @@
             <div id="alternativer">
                 <div>
                     <label for="start-slider">Start</label>
-                    <input type="range" min="0" max="98" id="start-slider">
+                    <input type="range" min="0" max="98" id="start-slider" value="1">
                     <p id="display-verdi-start">Verdi til slider</p>
                 </div>
                 <div>
                     <!-- Legg på eventListener som gjør at man ikke kan ha laere slutt enn start -->
                     <label for="slutt-slider">Slutt</label>
-                    <input type="range" min="1" max="99" id="slutt-slider">
+                    <input type="range" min="1" max="99" id="slutt-slider" value="50">
                     <p id="display-verdi-slutt">Verdi til slider</p>
                 </div>
                 <div>
@@ -39,6 +39,7 @@
                     <input type="color" value="#abcdef" id="farge-velger">
                 </div>
             </div>
+            <p id="feil-tekst"></p>
             <button id="start-knapp">Start</button>
         </div>
     </main>

@@ -38,11 +38,19 @@ raderSliderEl.addEventListener("input", () => {
 startKnappEl = document.querySelector("#start-knapp")
 startKnappEl.addEventListener("click", knappetrykk)
 
+feilTekstEl = document.querySelector("#feil-tekst")
+fargeVelgerEl = document.querySelector("#farge-velger")
+
 function knappetrykk(){
     console.log("HEIIII")
     if (startSliderEl.value >= sluttSliderEl.value){
-        // Du må gjøre ting ordentlig, endre slik at tall funker osv.
+        feilTekstEl.innerHTML = "Start-verdien må være lavere enn slutt-verdien"
     } else {
+        localStorage.setItem("startlagring",String(startSliderEl.value));
+        localStorage.setItem("sluttlagring",String(sluttSliderEl.value));
+        localStorage.setItem("raderlagring",String(raderSliderEl.value));
+        localStorage.setItem("fargelagring",String(fargeVelgerEl.value));
         window.location.href = "pyramideside.html"
+
     }
 }

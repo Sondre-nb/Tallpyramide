@@ -122,7 +122,7 @@ function fargelegg(plasseringer) {
                 for (let j = 1; j<=100; j++){
                     animasjontimeouts.push(
                         setTimeout(function(){
-                            rute.style.background = "linear-gradient(0deg,white " +(100-j)+"%, greenyellow "+(100-j)+"%)"
+                            rute.style.background = "linear-gradient(0deg,white " +(100-j)+"%," + farge +" "+(100-j)+"%)"
                         }, 5*j)
                     )
                 }
@@ -144,11 +144,16 @@ function byttSøk(e) {
     }
 }
 
-let antall_rader = 10
-let intervall_topp = 10
+let antall_rader = Number(localStorage.getItem("raderlagring"))
+let intervall_bunn = Number(localStorage.getItem("startlagring"))
+let intervall_topp = Number(localStorage.getItem("sluttlagring"))
+let farge = localStorage.getItem("fargelagring")
 let minsteVerdi = antall_rader * intervall_topp
 
-lagPyramide(1,intervall_topp,antall_rader)
+console.log(intervall_bunn)
+console.log(intervall_topp)
+
+lagPyramide(intervall_bunn,intervall_topp,antall_rader)
 // finnRute2(0,0,0,[0])
 finnRute(0,0,0,[0])
 
