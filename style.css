@@ -1,3 +1,14 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Saira", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
 header{
     position: fixed;
     margin: 0;
@@ -7,12 +18,12 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.4rem;
 }
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+header h1 {
+    font-weight: 400;
 }
+
 main{
     padding-top: 80px;
     background-color: #FFEAEC;
