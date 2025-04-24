@@ -25,9 +25,12 @@ header h1 {
     font-weight: 400;
 }
 
+body {
+    background-color: #FFEAEC;
+}
+
 main{
     padding-top: 80px;
-    background-color: #FFEAEC;
 }
 
 input, label, p{

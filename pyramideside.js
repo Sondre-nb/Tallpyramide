@@ -7,6 +7,9 @@ let sumPyramide = [];
 let plassPyramide = [];
 let pyramideEl = document.querySelector("#pyramide");
 
+let hastighet_liste = []
+let iterasjonsliste = []
+
 function finnRute(plass, rad, verdi, plassering){
     if (rad < pyramide.length - 1) {
         finnRute(plass, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass]))
@@ -32,16 +35,15 @@ function sjekkVerdi(verdi, plassering) {
 }
 
 function finnRute2(plass, rad, verdi, plassering){
+    iterasjoner_julie_metoden++;
     if (rad < pyramide.length - 1) {
         if (sumPyramide[rad+1][plass] != 0 && sumPyramide[rad+1][plass+1] != 0) {
             if (sumPyramide[rad+1][plass] > sumPyramide[rad+1][plass+1]) {
                 sumPyramide[rad][plass] = pyramide[rad][plass] + sumPyramide[rad+1][plass]
-                //console.log([plass].concat(plassPyramide[rad+1][plass]))
                 plassPyramide[rad][plass] = [plass].concat(plassPyramide[rad+1][plass])
                 sjekkVerdi(verdi + sumPyramide[rad+1][plass] + pyramide[rad][plass], plassering.concat(plassPyramide[rad+1][plass]))
             } else {
                 sumPyramide[rad][plass] = pyramide[rad][plass] + sumPyramide[rad+1][plass+1]
-                //console.log([plass].concat(plassPyramide[rad+1][plass+1]))
                 plassPyramide[rad][plass] = [plass].concat(plassPyramide[rad+1][plass+1])
                 sjekkVerdi(verdi + sumPyramide[rad+1][plass+1] + pyramide[rad][plass], plassering.concat(plassPyramide[rad+1][plass+1]))
             }
@@ -62,7 +64,7 @@ function storste(a,b){
     }
 }
 
-function fiinnHoyesteVedLokke(pyr){
+function finnHoyesteVedLokke(pyr){
     // Kopierer liste og ikke bare referansen siden den blir endret på
     let trekant = []
     for (let linje of pyr){
@@ -71,7 +73,7 @@ function fiinnHoyesteVedLokke(pyr){
     //let iterasjoner = 0
     for (let i = trekant.length-2;i>=0;i--){
         for (let j = 0; j<trekant[i].length;j++){
-            //iterasjoner++
+            iterasjoner_sum_oppover++;
             trekant[i][j] += storste(trekant[i+1][j], trekant[i+1][j+1])
         }
     }
@@ -79,6 +81,7 @@ function fiinnHoyesteVedLokke(pyr){
 }
 
 function finnBesteSti(rad, index){
+    iterasjoner_rekursiv++;
     let sum = pyramide[rad][index]
     if (rad < pyramide.length - 1){
         let sum_venstre = finnBesteSti(rad+1, index)
@@ -273,7 +276,7 @@ function fraRGBListeTilHex(rgb){
     return hex
 }
 
-let antall_rader = 4//Number(localStorage.getItem("raderlagring"))
+let antall_rader = 10//Number(localStorage.getItem("raderlagring"))
 let intervall_bunn = 1//Number(localStorage.getItem("startlagring"))
 let intervall_topp = 5//Number(localStorage.getItem("sluttlagring"))
 let farge = "greenyellow" //localStorage.getItem("fargelagring")
@@ -347,8 +350,7 @@ lagSektordiagram()
 console.log(summer)
 console.log(navn_kategorier_sektordiagram)
 
-const yValuesCake = [55, 49, 44, 21];
-const barColorsCake = [
+let bitfarger = [
   "#9467CB",
   "#6DB1BF",
   "#ECE4B7",
@@ -360,7 +362,7 @@ new Chart("sumfordelingsdiagram", {
   data: {
     labels: navn_kategorier_sektordiagram,
     datasets: [{
-      backgroundColor: barColorsCake,
+      backgroundColor: bitfarger,
       data: antall_i_intervall
     }]
   },
@@ -372,41 +374,81 @@ new Chart("sumfordelingsdiagram", {
   }
 });
 
-const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-const yValues = [55, 49, 44, 24, 15, 2];
-const barColors = ["red", "green","blue","orange","brown"];
+let hastigheter = [];
+let iterasjoner = [];
 
-new Chart("myChart", {
+let iterasjoner_rekursiv = 0;
+let t0 = performance.now();
+finnBesteSti(0,0)
+let t1 = performance.now();
+hastigheter.push(t1-t0)
+iterasjoner.push(iterasjoner_rekursiv)
+
+let iterasjoner_julie_metoden = 0;
+t0 = performance.now()
+finnRute2(0,0,0,[0])
+t1 = performance.now();
+hastigheter.push(t1-t0)
+iterasjoner.push(iterasjoner_julie_metoden)
+
+let iterasjoner_sum_oppover = 0;
+t0 = performance.now()
+finnHoyesteVedLokke(pyramide)
+t1 = performance.now();
+hastigheter.push(t1-t0)
+iterasjoner.push(iterasjoner_sum_oppover)
+
+console.log(hastigheter)
+console.log(iterasjoner)
+
+let x_verdier = ["Rekursiv", "Julie-metoden", "Sum oppover"];
+let stolpefarger = ["#9467CB", "#6DB1BF","#ECE4B7"];
+
+new Chart("hastighet-diagram", {
   type: "bar",
   data: {
-    labels: xValues,
+    labels: x_verdier,
     datasets: [{
-      backgroundColor: barColors,
-      data: yValues
+      backgroundColor: stolpefarger,
+      data: hastigheter
     }]
   },
   options: {
     legend: {display: false},
     title: {
       display: true,
-      text: "World Wine Production 2018"
+      text: "Hastighet (ms)"
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
     }
   }
 });
-new Chart("myChart2", {
+new Chart("iterasjon-diagram", {
     type: "bar",
     data: {
-      labels: xValues,
+      labels: x_verdier,
       datasets: [{
-        backgroundColor: barColors,
-        data: yValues
+        backgroundColor: stolpefarger,
+        data: iterasjoner
       }]
     },
     options: {
-      legend: {display: false},
-      title: {
-        display: true,
-        text: "World Wine Production 2018"
-      }
+        legend: {display: false},
+        title: {
+            display: true,
+            text: "Antall iterasjoner"
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
     }
   });
