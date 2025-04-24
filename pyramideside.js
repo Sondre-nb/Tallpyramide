@@ -247,11 +247,39 @@ let minsteVerdi = antall_rader * intervall_topp
 
 // Velger passende tekstfarge til rutene som skal endre farge (baseres på brukerens farge)
 let farge_som_rgb = fraHexTilRGBListe(farge)
-for (let i = 0; i < farge_som_rgb.length; i++){
-    farge_som_rgb[i] = (farge_som_rgb[i] + 127)%255
+/* for (let i = 0; i < farge_som_rgb.length; i++){
+    farge_som_rgb[i] = 255-farge_som_rgb[i]
 
+} */
+
+function luminesens([r, g, b]) { // Magisk lumeninesens-utregning
+    return (0.299 * r + 0.587 * g + 0.114 * b)/255
 }
-let tekstfargeRiktigeRuter = fraRGBListeTilHex(farge_som_rgb)
+
+function forskjellLumin(rgb1, rgb2) {
+    let farge1 = luminesens(rgb1);
+    let farge2 = luminesens(rgb2);
+    return Math.max(farge1, farge2) - Math.min(farge1, farge2);
+}
+function finnBesteFargeTilfeldig(bakgrunnRGB, antallForsok = 30) {
+    let bestKontrast = 0;
+    let bestFarge = [0, 0, 0];
+
+    for (let i = 0; i < antallForsok; i++) {
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+        let kontrast = forskjellLumin(bakgrunnRGB, [r, g, b]);
+        if (kontrast > bestKontrast) {
+            bestKontrast = kontrast;
+            bestFarge = [r, g, b];
+        }
+    }
+
+    return bestFarge;
+}
+
+let tekstfargeRiktigeRuter = fraRGBListeTilHex(finnBesteFargeTilfeldig(farge_som_rgb))
 
 
 lagPyramide(intervall_bunn,intervall_topp,antall_rader)
