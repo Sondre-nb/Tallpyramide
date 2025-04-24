@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
@@ -9,7 +9,7 @@
     font-variation-settings:
         "wdth" 100;
 }
-header{
+header {
     position: fixed;
     margin: 0;
     height: 80px;
@@ -33,7 +33,7 @@ main{
     padding-top: 80px;
 }
 
-input, label, p{
+input, label, p {
     margin: 5px;
 }
 
@@ -51,9 +51,12 @@ input, label, p{
     height: 500px;
     padding: 10px;
 }
-#main-container > div {
+#main-container > div, a {
     background-color: #F39A9D;
     padding: 5px;
+}
+#main-container a:hover {
+    background-color: #F7AAAC;
 }
 #hastighet-graf {
     grid-area: h;
@@ -115,4 +118,8 @@ input, label, p{
     position: absolute;
     margin: 5px;
     text-align: center;
+}
+#main-container a{
+    text-decoration: none;
+    color: black;
 }

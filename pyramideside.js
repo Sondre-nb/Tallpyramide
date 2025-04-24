@@ -276,10 +276,10 @@ function fraRGBListeTilHex(rgb){
     return hex
 }
 
-let antall_rader = 10//Number(localStorage.getItem("raderlagring"))
-let intervall_bunn = 1//Number(localStorage.getItem("startlagring"))
-let intervall_topp = 5//Number(localStorage.getItem("sluttlagring"))
-let farge = "greenyellow" //localStorage.getItem("fargelagring")
+let antall_rader = Number(localStorage.getItem("raderlagring"))
+let intervall_bunn = Number(localStorage.getItem("startlagring"))
+let intervall_topp = Number(localStorage.getItem("sluttlagring"))
+let farge = localStorage.getItem("fargelagring")
 
 let minsteVerdi = antall_rader * intervall_topp
 
@@ -452,3 +452,18 @@ new Chart("iterasjon-diagram", {
         }
     }
   });
+
+let til_start_knapp = document.querySelector("#tilbake") 
+let til_algoritmer_knapp = document.querySelector("#mer-om-algoritme") 
+
+function tekstHover(e) {
+    e.target.style.paddingLeft = "10px"
+}
+function tekstIkkeHover(e) {
+    e.target.style.paddingLeft = "5px"
+}
+
+til_start_knapp.addEventListener("mouseover", tekstHover)
+til_start_knapp.addEventListener("mouseout", tekstIkkeHover)
+til_algoritmer_knapp.addEventListener("mouseover", tekstHover)
+til_algoritmer_knapp.addEventListener("mouseout", tekstIkkeHover)
