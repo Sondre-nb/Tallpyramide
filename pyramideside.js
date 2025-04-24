@@ -1,6 +1,7 @@
 let plasseringer;
 let lavestePlasseringer;
 let høyesteVerdi = 0;
+let summer = [];
 let pyramide = [];
 let sumPyramide = [];
 let plassPyramide = [];
@@ -19,6 +20,7 @@ function finnRute(plass, rad, verdi, plassering){
             minsteVerdi = verdi + pyramide[rad][plass];
             lavestePlasseringer = plassering;
         }
+        summer.push(verdi + pyramide[rad][plass])
     }
 }
 
@@ -144,10 +146,44 @@ function byttSøk(e) {
     }
 }
 
-let antall_rader = Number(localStorage.getItem("raderlagring"))
-let intervall_bunn = Number(localStorage.getItem("startlagring"))
-let intervall_topp = Number(localStorage.getItem("sluttlagring"))
-let farge = localStorage.getItem("fargelagring")
+function sorterTall(a, b) {
+    return a-b;
+}
+
+function lagSektordiagram() {
+    summer.sort(sorterTall)
+    let antall_inndelinger = 4;
+    let differanse = summer[summer.length-1] - summer[0]
+    if (summer.length < 4) {
+        antall_inndelinger = summer.length
+    } 
+    if (differanse < antall_inndelinger) {
+        antall_inndelinger = differanse + 1
+    }
+    let rest = (differanse+1) % antall_inndelinger
+    let intervall = (differanse+1 - rest) / antall_inndelinger
+    let startverdier_i_intervall = []
+    let sluttverdier_i_intervall = []
+    console.log(differanse, antall_inndelinger, rest, intervall)
+    let verdi = summer[0]
+    for (let i = 0; i < antall_inndelinger; i++) {
+        startverdier_i_intervall.push(verdi)
+        verdi += intervall;
+        if (rest > 0) {
+            verdi++;
+            rest--;
+        }
+        sluttverdier_i_intervall.push(verdi-1)
+    } 
+    console.log(startverdier_i_intervall)
+    console.log(sluttverdier_i_intervall)
+}
+
+let antall_rader = 4//Number(localStorage.getItem("raderlagring"))
+let intervall_bunn = 1//Number(localStorage.getItem("startlagring"))
+let intervall_topp = 10//Number(localStorage.getItem("sluttlagring"))
+let farge = "greenyellow" //localStorage.getItem("fargelagring")
+
 let minsteVerdi = antall_rader * intervall_topp
 
 console.log(intervall_bunn)
@@ -178,3 +214,33 @@ console.log(sumPyramide)
 console.log(plassPyramide)
 console.log(plasseringer)
 console.log(høyesteVerdi)
+
+lagSektordiagram()
+console.log(summer)
+
+const xValuesCake = ["Italy", "France", "Spain", "USA", "Argentina"];
+const yValuesCake = [55, 49, 44, 21, 15];
+const barColorsCake = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145"
+];
+
+new Chart("sumfordelingsdiagram", {
+  type: "pie",
+  data: {
+    labels: xValuesCake,
+    datasets: [{
+      backgroundColor: barColorsCake,
+      data: yValuesCake
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "World Wide Wine Production 2018"
+    }
+  }
+});
