@@ -152,11 +152,17 @@ function sorterTall(a, b) {
     return a-b;
 }
 
+
+let startverdier_i_intervall;
+let sluttverdier_i_intervall;
+let antall_i_intervall;
+let navn_kategorier_sektordiagram = [];
+
 function lagSektordiagram() {
     summer.sort(sorterTall)
     let antall_inndelinger = 4;
     let differanse = summer[summer.length-1] - summer[0]
-    if (summer.length < 4) {
+    if (summer.length < antall_inndelinger) {
         antall_inndelinger = summer.length
     }
     if (differanse < antall_inndelinger) {
@@ -164,8 +170,10 @@ function lagSektordiagram() {
     }
     let rest = (differanse+1) % antall_inndelinger
     let intervall = (differanse+1 - rest) / antall_inndelinger
-    let startverdier_i_intervall = []
-    let sluttverdier_i_intervall = []
+    startverdier_i_intervall = []
+    sluttverdier_i_intervall = []
+    antall_i_intervall = Array(antall_inndelinger).fill(0)
+    console.log(antall_i_intervall)
     console.log(differanse, antall_inndelinger, rest, intervall)
     let verdi = summer[0]
     for (let i = 0; i < antall_inndelinger; i++) {
@@ -176,9 +184,22 @@ function lagSektordiagram() {
             rest--;
         }
         sluttverdier_i_intervall.push(verdi-1)
-    }
+        if (startverdier_i_intervall[i] == sluttverdier_i_intervall[i]) {
+            navn_kategorier_sektordiagram.push(String(startverdier_i_intervall[i]))
+        } else {
+            navn_kategorier_sektordiagram.push(String(startverdier_i_intervall[i] + "-" + sluttverdier_i_intervall[i]))
+        }
+    } 
     console.log(startverdier_i_intervall)
     console.log(sluttverdier_i_intervall)
+    for (let i = 0; i < summer.length; i++) {
+        let plassering = 0;
+        while (summer[i] > sluttverdier_i_intervall[plassering]) {
+            plassering++;
+        }
+        antall_i_intervall[plassering]++;
+    }
+    console.log("hei", antall_i_intervall)
 }
 
 function fraHexTilRGBListe(hex){
@@ -238,10 +259,10 @@ function fraRGBListeTilHex(rgb){
     return hex
 }
 
-let antall_rader = Number(localStorage.getItem("raderlagring"))
-let intervall_bunn = Number(localStorage.getItem("startlagring"))
-let intervall_topp = Number(localStorage.getItem("sluttlagring"))
-let farge = localStorage.getItem("fargelagring")
+let antall_rader = 7//Number(localStorage.getItem("raderlagring"))
+let intervall_bunn = 1//Number(localStorage.getItem("startlagring"))
+let intervall_topp = 10//Number(localStorage.getItem("sluttlagring"))
+let farge = "greenyellow" //localStorage.getItem("fargelagring")
 
 let minsteVerdi = antall_rader * intervall_topp
 
@@ -310,30 +331,68 @@ console.log(høyesteVerdi)
 
 lagSektordiagram()
 console.log(summer)
+console.log(navn_kategorier_sektordiagram)
 
-const xValuesCake = ["Italy", "France", "Spain", "USA", "Argentina"];
-const yValuesCake = [55, 49, 44, 21, 15];
+const yValuesCake = [55, 49, 44, 21];
 const barColorsCake = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
+  "#9467CB",
+  "#6DB1BF",
+  "#ECE4B7",
+  "#5B9A74"
 ];
 
 new Chart("sumfordelingsdiagram", {
   type: "pie",
   data: {
-    labels: xValuesCake,
+    labels: navn_kategorier_sektordiagram,
     datasets: [{
       backgroundColor: barColorsCake,
-      data: yValuesCake
+      data: antall_i_intervall
     }]
   },
   options: {
     title: {
       display: true,
-      text: "World Wide Wine Production 2018"
+      text: "Fordeling av sum"
     }
   }
 });
+
+const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+const yValues = [55, 49, 44, 24, 15, 2];
+const barColors = ["red", "green","blue","orange","brown"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "World Wine Production 2018"
+    }
+  }
+});
+new Chart("myChart2", {
+    type: "bar",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    options: {
+      legend: {display: false},
+      title: {
+        display: true,
+        text: "World Wine Production 2018"
+      }
+    }
+  });
