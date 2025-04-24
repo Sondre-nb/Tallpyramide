@@ -122,6 +122,7 @@ function fargelegg(plasseringer) {
             setTimeout(function () {
                 let rute = rader[i].querySelectorAll("div")[plasseringer[i]]
                 for (let j = 1; j<=100; j++){
+                    rute.style.color = tekstfargeRiktigeRuter
                     animasjontimeouts.push(
                         setTimeout(function(){
                             rute.style.background = "linear-gradient(0deg,white " +(100-j)+"%," + farge +" "+(100-j)+"%)"
@@ -137,6 +138,7 @@ function byttSøk(e) {
     let ruter = document.querySelectorAll(".tallrute")
     for (let i = 0; i < ruter.length; i++) {
         ruter[i].style.background = "white"
+        ruter[i].style.color = "black"
     }
     let valgtKnapp = e.target
     if (valgtKnapp.id == "høyest") {
@@ -156,7 +158,7 @@ function lagSektordiagram() {
     let differanse = summer[summer.length-1] - summer[0]
     if (summer.length < 4) {
         antall_inndelinger = summer.length
-    } 
+    }
     if (differanse < antall_inndelinger) {
         antall_inndelinger = differanse + 1
     }
@@ -174,20 +176,83 @@ function lagSektordiagram() {
             rest--;
         }
         sluttverdier_i_intervall.push(verdi-1)
-    } 
+    }
     console.log(startverdier_i_intervall)
     console.log(sluttverdier_i_intervall)
 }
 
-let antall_rader = 4//Number(localStorage.getItem("raderlagring"))
-let intervall_bunn = 1//Number(localStorage.getItem("startlagring"))
-let intervall_topp = 10//Number(localStorage.getItem("sluttlagring"))
-let farge = "greenyellow" //localStorage.getItem("fargelagring")
+function fraHexTilRGBListe(hex){
+    rgb = [0,0,0]
+    for (let i=1;i<hex.length;i++){
+        let value
+        if (hex[i] == "a"){
+            value = 10
+        } else if ((hex[i] == "b")){
+            value = 11
+        } else if ((hex[i] == "c")){
+            value = 12
+        } else if ((hex[i] == "d")){
+            value = 13
+        } else if ((hex[i] == "e")){
+            value = 14
+        } else if ((hex[i] == "f")){
+            value = 15
+        } else {
+            value = Number(hex[i])
+        }
+        if (i%2 != 0){
+            rgb[Math.floor((i-1)/2)] += value*16
+        } else{
+            rgb[Math.floor((i-1)/2)] += value
+        }
+    }
+    return rgb
+}
+
+function fraTiTilSekstenTallsSystem(titall){
+    if (titall == 10){
+        return "a"
+    } else if (titall == 11){
+        return "b"
+    } else if (titall == 12){
+        return "c"
+    } else if (titall == 13){
+        return "d"
+    } else if (titall == 14){
+        return "e"
+    } else if (titall == 15){
+        return "f"
+    } else {
+        return titall
+    }
+}
+
+function fraRGBListeTilHex(rgb){
+    let hex = "#"
+    for(let primerfarge of rgb){
+        let seksten_plass = Math.floor(primerfarge/16)
+        hex += fraTiTilSekstenTallsSystem(seksten_plass)
+        let enkelt_plass = primerfarge%16
+        hex += fraTiTilSekstenTallsSystem(enkelt_plass)
+    }
+    return hex
+}
+
+let antall_rader = Number(localStorage.getItem("raderlagring"))
+let intervall_bunn = Number(localStorage.getItem("startlagring"))
+let intervall_topp = Number(localStorage.getItem("sluttlagring"))
+let farge = localStorage.getItem("fargelagring")
 
 let minsteVerdi = antall_rader * intervall_topp
 
-console.log(intervall_bunn)
-console.log(intervall_topp)
+// Velger passende tekstfarge til rutene som skal endre farge (baseres på brukerens farge)
+let farge_som_rgb = fraHexTilRGBListe(farge)
+for (let i = 0; i < farge_som_rgb.length; i++){
+    farge_som_rgb[i] = (farge_som_rgb[i] + 127)%255
+
+}
+let tekstfargeRiktigeRuter = fraRGBListeTilHex(farge_som_rgb)
+
 
 lagPyramide(intervall_bunn,intervall_topp,antall_rader)
 // finnRute2(0,0,0,[0])
