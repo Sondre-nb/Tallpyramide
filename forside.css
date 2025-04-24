@@ -46,4 +46,11 @@ main{
     border: none;
     background-color: #6DB1BF;
     margin-bottom: 10px;
+    border-radius: 8px;
+    border: solid #528994 2px;
+}
+#start-knapp:hover{
+    background-color: #61a3b0;
+    cursor: pointer;
+    transform: scale(1.04);
 }
