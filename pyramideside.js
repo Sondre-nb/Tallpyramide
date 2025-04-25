@@ -206,7 +206,7 @@ function lagSektordiagram() {
         } else {
             navn_kategorier_sektordiagram.push(String(startverdier_i_intervall[i] + "-" + sluttverdier_i_intervall[i]))
         }
-    } 
+    }
     console.log(startverdier_i_intervall)
     console.log(sluttverdier_i_intervall)
     for (let i = 0; i < summer.length; i++) {

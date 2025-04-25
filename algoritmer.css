@@ -44,4 +44,6 @@ h2{
 }
 .algoritme-animasjon{
     height: 300px;
+    display: flex;
+    justify-content: center;
 }
