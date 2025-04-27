@@ -374,28 +374,41 @@ new Chart("sumfordelingsdiagram", {
   }
 });
 
+let repetisjoner = 10000
 let hastigheter = [];
 let iterasjoner = [];
 
 let iterasjoner_rekursiv = 0;
 let t0 = performance.now();
-finnBesteSti(0,0)
+for (let i=0;i<repetisjoner;i++){
+    //console.time("Rek")
+    finnBesteSti(0,0)
+    //console.timeEnd("Rek")
+}
 let t1 = performance.now();
-hastigheter.push(t1-t0)
+hastigheter.push((t1-t0)/repetisjoner)
 iterasjoner.push(iterasjoner_rekursiv)
 
 let iterasjoner_julie_metoden = 0;
 t0 = performance.now()
-finnRute2(0,0,0,[0])
+for (let i=0;i<repetisjoner;i++){
+    //console.time("Julie")
+    finnRute2(0,0,0,[0])
+    //console.timeEnd("Julie")
+}
 t1 = performance.now();
-hastigheter.push(t1-t0)
+hastigheter.push((t1-t0)/repetisjoner)
 iterasjoner.push(iterasjoner_julie_metoden)
 
 let iterasjoner_sum_oppover = 0;
 t0 = performance.now()
-finnHoyesteVedLokke(pyramide)
+for (let i=0;i<repetisjoner;i++){
+    //console.time("lokke")
+    finnHoyesteVedLokke(pyramide)
+    //console.timeEnd("lokke")
+}
 t1 = performance.now();
-hastigheter.push(t1-t0)
+hastigheter.push((t1-t0)/repetisjoner)
 iterasjoner.push(iterasjoner_sum_oppover)
 
 console.log(hastigheter)
@@ -453,8 +466,8 @@ new Chart("iterasjon-diagram", {
     }
   });
 
-let til_start_knapp = document.querySelector("#tilbake") 
-let til_algoritmer_knapp = document.querySelector("#mer-om-algoritme") 
+let til_start_knapp = document.querySelector("#tilbake")
+let til_algoritmer_knapp = document.querySelector("#mer-om-algoritme")
 
 function tekstHover(e) {
     e.target.style.paddingLeft = "10px"
