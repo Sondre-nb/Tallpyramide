@@ -36,6 +36,7 @@ function sjekkVerdi(verdi, plassering) {
 
 function finnRute2(plass, rad, verdi, plassering){
     iterasjoner_julie_metoden++;
+
     if (rad < pyramide.length - 1) {
         if (sumPyramide[rad+1][plass] != 0 && sumPyramide[rad+1][plass+1] != 0) {
             if (sumPyramide[rad+1][plass] > sumPyramide[rad+1][plass+1]) {
@@ -374,13 +375,14 @@ new Chart("sumfordelingsdiagram", {
   }
 });
 
-let repetisjoner = 10000
+let repetisjoner = 100
 let hastigheter = [];
 let iterasjoner = [];
 
 let iterasjoner_rekursiv = 0;
 let t0 = performance.now();
 for (let i=0;i<repetisjoner;i++){
+    iterasjoner_rekursiv = 0;
     //console.time("Rek")
     finnBesteSti(0,0)
     //console.timeEnd("Rek")
@@ -392,7 +394,17 @@ iterasjoner.push(iterasjoner_rekursiv)
 let iterasjoner_julie_metoden = 0;
 t0 = performance.now()
 for (let i=0;i<repetisjoner;i++){
+    iterasjoner_julie_metoden = 0;
     //console.time("Julie")
+    // Lager sumPyramide
+    sumPyramide = [Array.from(pyramide[pyramide.length-1])]
+    for (let i = pyramide.length-2; i>0;i--){
+        let rad = []
+        for (let j = 0; j<i;j++)[
+            rad.push(0)
+        ]
+        sumPyramide.unshift(rad)
+    }
     finnRute2(0,0,0,[0])
     //console.timeEnd("Julie")
 }
@@ -403,6 +415,7 @@ iterasjoner.push(iterasjoner_julie_metoden)
 let iterasjoner_sum_oppover = 0;
 t0 = performance.now()
 for (let i=0;i<repetisjoner;i++){
+    iterasjoner_sum_oppover = 0;
     //console.time("lokke")
     finnHoyesteVedLokke(pyramide)
     //console.timeEnd("lokke")
