@@ -108,6 +108,11 @@ function lagPyramide(start, slutt, rader) {
             let rute = document.createElement("div")
             rute.innerText = tall
             rute.setAttribute("class", "tallrute")
+            if (antall_rader > 10) {
+                rute.style.height = "20px"
+                rute.style.width = "20px"
+                rute.style.fontSize = "13px"
+            } 
             rad_liste.push(tall)
             rad.appendChild(rute)
             if (i != rader) {
@@ -191,8 +196,6 @@ function lagSektordiagram() {
     startverdier_i_intervall = []
     sluttverdier_i_intervall = []
     antall_i_intervall = Array(antall_inndelinger).fill(0)
-    console.log(antall_i_intervall)
-    console.log(differanse, antall_inndelinger, rest, intervall)
     let verdi = summer[0]
     for (let i = 0; i < antall_inndelinger; i++) {
         startverdier_i_intervall.push(verdi)
@@ -208,8 +211,6 @@ function lagSektordiagram() {
             navn_kategorier_sektordiagram.push(String(startverdier_i_intervall[i] + "-" + sluttverdier_i_intervall[i]))
         }
     }
-    console.log(startverdier_i_intervall)
-    console.log(sluttverdier_i_intervall)
     for (let i = 0; i < summer.length; i++) {
         let plassering = 0;
         while (summer[i] > sluttverdier_i_intervall[plassering]) {
@@ -217,7 +218,6 @@ function lagSektordiagram() {
         }
         antall_i_intervall[plassering]++;
     }
-    console.log("hei", antall_i_intervall)
 }
 
 function fraHexTilRGBListe(hex){
@@ -324,6 +324,7 @@ let tekstfargeRiktigeRuter = fraRGBListeTilHex(finnBesteFargeTilfeldig(farge_som
 lagPyramide(intervall_bunn,intervall_topp,antall_rader)
 // finnRute2(0,0,0,[0])
 finnRute(0,0,0,[0])
+
 
 let mulighet_tekst = document.querySelector("#antall-muligheter")
 mulighet_tekst.innerText += " " + 2**(antall_rader-1)
