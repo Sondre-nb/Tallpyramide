@@ -393,18 +393,20 @@ iterasjoner.push(iterasjoner_rekursiv)
 
 let iterasjoner_julie_metoden = 0;
 t0 = performance.now()
+console.log(sumPyramide, "hie")
 for (let i=0;i<repetisjoner;i++){
     iterasjoner_julie_metoden = 0;
     //console.time("Julie")
     // Lager sumPyramide
     sumPyramide = [Array.from(pyramide[pyramide.length-1])]
-    for (let i = pyramide.length-2; i>0;i--){
+    for (let i = pyramide.length-2; i>=0;i--){
         let rad = []
-        for (let j = 0; j<i;j++)[
+        for (let j = 0; j<=i;j++)[
             rad.push(0)
         ]
         sumPyramide.unshift(rad)
     }
+    console.log(sumPyramide, "hei")
     finnRute2(0,0,0,[0])
     //console.timeEnd("Julie")
 }

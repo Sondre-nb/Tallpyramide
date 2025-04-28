@@ -119,7 +119,10 @@ input, label, p {
     margin: 5px;
     text-align: center;
 }
-#main-container a{
+a{
     text-decoration: none;
     color: black;
+}
+header a{
+    background-color: #6db1bf00;
 }
