@@ -1,4 +1,4 @@
-let pyramiderTilAimasjonerEl = document.querySelector(".pyramide-til-algoritme-animasjon");
+/* let pyramiderTilAimasjonerEl = document.querySelector(".pyramide-til-algoritme-animasjon");
 let pyramide = []
 
 function lagPyramide(start, slutt, rader) {
@@ -17,10 +17,28 @@ function lagPyramide(start, slutt, rader) {
         pyramide.push(rad_liste)
         /* for (let algoritme of pyramiderTilAimasjonerEl){
             algoritme.appendChild(rad)
-        } */
+        } 
         pyramiderTilAimasjonerEl.appendChild(rad)
     }
     console.log("tinger er tegnet")
 }
 
 lagPyramide(1,10,4)
+
+*/
+
+
+
+
+
+
+let animasjonJulieMetoden = [
+    {
+        ruter: [(0,0)], 
+        farger: ["greenyellow"]
+    },
+    {
+        ruter: [(0,1), (0,0)], 
+        farger: ["greenyellow", "white"]
+    },
+]

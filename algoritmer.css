@@ -47,4 +47,18 @@ h2{
     height: 300px;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+.pyramide-til-algoritme-animasjon{
+    display: flex;
+    flex-direction: row;
+}
+.algoritme-forklaring {
+    padding: 10px;
+}
+.pyramide-plassering {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px;
 }
