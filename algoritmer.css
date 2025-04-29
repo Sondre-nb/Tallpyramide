@@ -26,7 +26,8 @@ header h1 {
 }
 
 main{
-    padding-top: 80px;
+    padding-top: 105px;
+    padding-bottom: 25px;
     background-color: #FFEAEC;
     display: flex;
     flex-direction: column;
@@ -36,7 +37,7 @@ main > div{
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-inline: 50px;
-    margin-block: 30px;
+    margin-block: 25px;
     background-color: #F39A9D;
 }
 h2{
