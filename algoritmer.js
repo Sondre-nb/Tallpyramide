@@ -46,129 +46,6 @@ function animerPyramider(pyramideID, animasjonsliste, timeoutMs=1000){
     }
 }
 
-
-/* let animasjonerSumOppover = [
-    {
-        fargeruter:[(3,0), (4,0), (4,1)],
-        farge:["greenyellow", "yellow", "yellow"],
-        tallRuter:[],
-        tall:[]
-    },
-    {
-        fargeruter:[(4,0), (4,1)],
-        farge:["greenyellow", "white"],
-        tallRuter:[(3,0)],
-        tall:[8]
-    },
-    {
-        fargeruter:[(3,1), (4,1), (4,2)],
-        farge:["greenyellow", "yellow", "yellow"],
-        tallRuter:[],
-        tall:[]
-    },
-    {
-        fargeruter:[(4,2), (4,1)],
-        farge:["greenyellow", "white"],
-        tallRuter:[(3,1)],
-        tall:[7]
-    },
-    {
-        fargeruter:[(3,2), (4,2), (4,3)],
-        farge:["greenyellow", "yellow", "yellow"],
-        tallRuter:[],
-        tall:[]
-    },
-    {
-        fargeruter:[(4,2), (4,3)],
-        farge:["greenyellow", "white"],
-        tallRuter:[(3,2)],
-        tall:[14]
-    },
-    {
-        fargeruter:[(3,3), (4,3), (4,4)],
-        farge:["greenyellow", "yellow", "yellow"],
-        tallRuter:[],
-        tall:[]
-    },
-    {
-        fargeruter:[(4,4), (4,3)],
-        farge:["greenyellow", "white"],
-        tallRuter:[(3,3)],
-        tall:[8]
-    },
-    {
-        fargeruter:[(2,0), (3,0), (3,1), (4,0), (4,2)],
-        farge:["greenyellow", "yellow", "yellow", "yellow", "yellow"],
-        tallRuter:[],
-        tall:[]
-    },
-    {
-        fargeruter:[(3,0), (4,0), (3,1), (4,2)],
-        farge:["greenyellow", "greenyellow", "white", "white"],
-        tallRuter:[(2,0)],
-        tall:[12]
-    },
-    {
-        fargeruter:[(2,1), (3,1), (3,2), (4,2)],
-        farge:["greenyellow", "yellow", "yellow", "yellow"],
-        tallRuter:[],
-        tall:[]
-    },
-    {
-        fargeruter:[(3,2), (4,2), (3,1)],
-        farge:["greenyellow", "greenyellow", "white"],
-        tallRuter:[(2,1)],
-        tall:[21]
-    },
-    {
-        fargeruter:[(2,2), (3,2), (3,3), (4,2), (4,4)],
-        farge:["greenyellow", "yellow", "yellow", "yellow", "yellow"],
-        tallRuter:[],
-        tall:[]
-    },
-    {
-        fargeruter:[(3,2), (4,2), (3,3), (4,4)],
-        farge:["greenyellow", "greenyellow", "white", "white"],
-        tallRuter:[(2,2)],
-        tall:[15]
-    },
-    {
-        fargeruter:[(1,0), (2,0), (2,1), (3,0), (4,0), (2,1), (3,2), (4,2)],
-        farge:["greenyellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow"],
-        tallRuter:[],
-        tall:[]
-    },
-    {
-        fargeruter:[(2,1), (3,2), (4,2), (2,0), (2,1), (3,0)],
-        farge:["greenyellow", "greenyellow", "greenyellow", "white", "white", "white"],
-        tallRuter:[(1,0)],
-        tall:[24]
-    },
-    {
-        fargeruter:[(1,1), (2,1), (3,2), (4,2), (2,2)],
-        farge:["greenyellow", "yellow", "yellow", "yellow", "yellow"],
-        tallRuter:[],
-        tall:[]
-    },
-    {
-        fargeruter:[(2,1), (3,2), (4,2), (2,2)],
-        farge:["greenyellow", "greenyellow", "greenyellow", "white"],
-        tallRuter:[(1,1)],
-        tall:[23]
-    },
-    {
-        fargeruter:[(0,0), (2,1), (3,2), (4,2), (2,2), (1,0), (1,1)],
-        farge:["greenyellow", "yellow", "yellow", "yellow", "yellow", "yellow", "yellow"],
-        tallRuter:[],
-        tall:[]
-    },
-    {
-        fargeruter:[(2,1), (3,2), (4,2), (2,2), (1,0), (1,1)],
-        farge:["greenyellow", "greenyellow", "greenyellow", "greenyellow", "greenyellow", "white"],
-        tallRuter:[(0,0)],
-        tall:[25]
-    }
-] */
 let animasjonerSumOppover = [
     {
         fargeruter:[[3,0], [4,0], [4,1]],
@@ -293,3 +170,188 @@ let animasjonerSumOppover = [
 ]
 
 animerPyramider("#sumOppover", animasjonerSumOppover)
+
+let animasjonRekursiv = [
+    {
+        fargeruter:[[0,0], [1,0]],
+        farge:["greenyellow", "yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[2,0]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[3,0]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,0]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,1], [4,0]],
+        farge:["yellow", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[3,1], [3,0], [4,1]],
+        farge:["yellow", "white", "yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,1]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,2], [4,1]],
+        farge:["yellow", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[2,1], [4,2], [3,1], [2,0]],
+        farge:["yellow", "white", "white", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[3,1]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,1]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,2], [4,1]],
+        farge:["yellow", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[3,2], [4,2], [3,1]],
+        farge:["yellow", "white", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,2]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,3], [4,2]],
+        farge:["yellow", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[1,1], [4,3], [3,2], [1,2]],
+        farge:["yellow", "white", "white", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[2,1]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[3,1]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,1]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,2], [4,1]],
+        farge:["yellow", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[3,2], [4,2], [3,1]],
+        farge:["yellow", "white", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,2]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,3], [4,2]],
+        farge:["yellow", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[2,2], [4,3], [3,2]],
+        farge:["yellow", "white", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[3,2]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,2]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,3], [4,2]],
+        farge:["yellow", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[3,3], [4,3], [3,2]],
+        farge:["yellow", "white", "white"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,3]],
+        farge:["yellow"],
+        tallRuter:[],
+        tall:[]
+    },
+    {
+        fargeruter:[[4,4], [4,3]],
+        farge:["yellow", "white"],
+        tallRuter:[],
+        tall:[]
+    }
+];
+
+animerPyramider("#rekursivt", animasjonRekursiv)
