@@ -34,11 +34,174 @@ lagPyramide(1,10,4)
 
 let animasjonJulieMetoden = [
     {
-        ruter: [(0,0)], 
-        farger: ["greenyellow"]
+        fargeruter: [[0,0]], 
+        farge: ["greenyellow"],
+        tallruter: [],
+        tall: []
     },
     {
-        ruter: [(0,1), (0,0)], 
-        farger: ["greenyellow", "white"]
+        ruter: [[1,0]], 
+        farger: ["greenyellow"],
+        tallruter: [],
+        tall: []
     },
+    {
+        ruter: [[2,0]], 
+        farger: ["greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,0]], 
+        farger: ["greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,0], [3,1]], 
+        farger: ["white", "greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,1], [2,0], [2,1]], 
+        farger: ["white", "white", "greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,1]], 
+        farger: ["greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,1], [3,2]], 
+        farger: ["white", "greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,2], [2,1], [1,0], [1,1]], 
+        farger: ["white", "white", "white", "greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[2,1]], 
+        farger: ["greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[2,1], [2,2]], 
+        farger: ["white", "greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,2]], 
+        farger: ["greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,2], [3,3]], 
+        farger: ["white", "greenyellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[0,0], [1,1], [2,2], [3,3]], 
+        farger: ["white", "white", "white", "white"],
+        tallruter: [],
+        tall: []
+    }
+]
+
+let animasjonJulieMetodenSum = [
+    {
+        fargeruter: [[0,0], [1,0], [1,1]], 
+        farge: ["greenyellow", "yellow", "yellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[1,0], [1,1], [2,0], [2,1]], 
+        farger: ["greenyellow", "white", "yellow", "yellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[2,0], [2,1], [3,0], [3,1]], 
+        farger: ["greenyellow", "white", "yellow", "yellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,0], [3,1], [4,0], [4,1]], 
+        farger: ["greenyellow", "white", "yellow", "yellow"],
+        tallruter: [[3,0]],
+        tall: [8]
+    },
+    {
+        ruter: [[3,0], [3,1], [4,0], [4,2]], 
+        farger: ["white", "greenyellow", "white", "yellow"],
+        tallruter: [[3,1]],
+        tall: [7]
+    },
+    {
+        ruter: [[3,1], [2,0], [2,1], [4,1], [4,2], [3,1], [3,2]], 
+        farger: ["white", "white", "greenyellow", "white", "white", "yellow", "yellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,1], [3,2], [4,1], [4,2]], 
+        farger: ["greenyellow", "white", "yellow", "yellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,1], [3,2], [4,1], [4,3]], 
+        farger: ["white", "greenyellow", "white", "yellow"],
+        tallruter: [[3,2]],
+        tall: [14]
+    },
+    {
+        ruter: [[3,2], [2,1], [1,0], [1,1], [4,2], [4,3], [2,2]], 
+        farger: ["white", "yellow", "white", "greenyellow", "white", "white", "yellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[2,1], [2,2], [3,1], [3,2]], 
+        farger: ["greenyellow", "white", "yellow", "yellow"],
+        tallruter: [[2,1]],
+        tall: [21]
+    },
+    {
+        ruter: [[2,1], [2,2], [3,1], [3,3]], 
+        farger: ["white", "greenyellow", "white", "yellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,2], [3,3], [4,2], [4,3]], 
+        farger: ["greenyellow", "white", "yellow", "yellow"],
+        tallruter: [],
+        tall: []
+    },
+    {
+        ruter: [[3,2], [3,3], [4,2], [4,4]], 
+        farger: ["white", "greenyellow", "white", "yellow"],
+        tallruter: [[3,3]],
+        tall: [8]
+    },
+    {
+        ruter: [[0,0], [1,1], [2,2], [3,3], [4,3], [4,4]], 
+        farger: ["white", "white", "white", "white", "white", "white"],
+        tallruter: [],
+        tall: []
+    }
 ]
