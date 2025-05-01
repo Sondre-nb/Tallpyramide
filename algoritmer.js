@@ -263,8 +263,8 @@ let animasjonRekursiv = [
         tall:[]
     },
     {
-        fargeruter:[[1,1], [4,3], [3,2], [1,2]],
-        farge:["yellow", "white", "white", "white"],
+        fargeruter:[[1,1], [1,0], [4,3], [3,2], [1,2], [1,0]],
+        farge:["yellow", "white", "white", "white", "white"],
         tallRuter:[],
         tall:[]
     },
@@ -293,7 +293,7 @@ let animasjonRekursiv = [
         tall:[]
     },
     {
-        fargeruter:[[3,2], [4,2], [3,1]],
+        fargeruter:[[3,2], [4,2], [3,1],],
         farge:["yellow", "white", "white"],
         tallRuter:[],
         tall:[]
@@ -311,8 +311,8 @@ let animasjonRekursiv = [
         tall:[]
     },
     {
-        fargeruter:[[2,2], [4,3], [3,2]],
-        farge:["yellow", "white", "white"],
+        fargeruter:[[2,2], [4,3], [3,2], [2, 1]],
+        farge:["yellow", "white", "white", "white"],
         tallRuter:[],
         tall:[]
     },
@@ -354,4 +354,4 @@ let animasjonRekursiv = [
     }
 ];
 
-animerPyramider("#rekursivt", animasjonRekursiv)
+animerPyramider("#rekursivt", animasjonRekursiv, timeoutMs=300)
