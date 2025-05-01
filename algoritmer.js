@@ -174,7 +174,7 @@ animerPyramider("#sumOppover", animasjonerSumOppover)
 let animasjonRekursiv = [
     {
         fargeruter:[[0,0], [1,0]],
-        farge:["greenyellow", "yellow"],
+        farge:["lightblue", "yellow"],
         tallRuter:[],
         tall:[]
     },
@@ -351,7 +351,13 @@ let animasjonRekursiv = [
         farge:["yellow", "white"],
         tallRuter:[],
         tall:[]
+    },
+    {
+        fargeruter:[[1,1], [2,2], [3,3], [4,4], [1, 0], [2, 1], [3, 2], [4, 2]],
+        farge:["white", "white", "white", "white", "lightblue", "lightblue", "lightblue", "lightblue"],
+        tallRuter:[],
+        tall:[]
     }
 ];
 
-animerPyramider("#rekursivt", animasjonRekursiv, timeoutMs=300)
+animerPyramider("#rekursivt", animasjonRekursiv, timeoutMs=200)
