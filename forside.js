@@ -14,25 +14,35 @@ design:
 - Søylediagram med iterasjoner
 */
 
+
 let startSliderEl = document.querySelector("#start-slider")
 let displayVerdiStartEl = document.querySelector("#display-verdi-start")
-displayVerdiStartEl.innerHTML = startSliderEl.value
-startSliderEl.addEventListener("input", () => {
-    displayVerdiStartEl.innerHTML = startSliderEl.value
-})
+
 
 let sluttSliderEl = document.querySelector("#slutt-slider")
 let displayVerdiSluttEl = document.querySelector("#display-verdi-slutt")
-displayVerdiSluttEl.innerHTML = sluttSliderEl.value
-sluttSliderEl.addEventListener("input", () => {
-    displayVerdiSluttEl.innerHTML = sluttSliderEl.value
-})
+
 
 let raderSliderEl = document.querySelector("#rader-slider")
 let displayVerdiRaderEl = document.querySelector("#display-verdi-rader")
-displayVerdiRaderEl.innerHTML = raderSliderEl.value
-raderSliderEl.addEventListener("input", () => {
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    displayVerdiStartEl.innerHTML = startSliderEl.value
+    startSliderEl.addEventListener("input", () => {
+        displayVerdiStartEl.innerHTML = startSliderEl.value
+    })
+
+    displayVerdiSluttEl.innerHTML = sluttSliderEl.value
+    sluttSliderEl.addEventListener("input", () => {
+        displayVerdiSluttEl.innerHTML = sluttSliderEl.value
+    })
+
     displayVerdiRaderEl.innerHTML = raderSliderEl.value
+    raderSliderEl.addEventListener("input", () => {
+        displayVerdiRaderEl.innerHTML = raderSliderEl.value
+    })
 })
 
 startKnappEl = document.querySelector("#start-knapp")

@@ -112,7 +112,7 @@ function lagPyramide(start, slutt, rader) {
                 rute.style.height = "20px"
                 rute.style.width = "20px"
                 rute.style.fontSize = "13px"
-            } 
+            }
             rad_liste.push(tall)
             rad.appendChild(rute)
             if (i != rader) {
@@ -376,7 +376,7 @@ new Chart("sumfordelingsdiagram", {
   }
 });
 
-let repetisjoner = 100
+let repetisjoner = Math.floor(10000/antall_rader)
 let hastigheter = [];
 let iterasjoner = [];
 
