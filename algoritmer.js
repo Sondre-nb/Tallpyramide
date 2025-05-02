@@ -349,7 +349,7 @@ let animasjonJulieMetodenSum = [
 let animasjonRekursiv = [
     {
         fargeruter:[[0,0], [1,0]],
-        farge:["greenyellow", "yellow"],
+        farge:["lightblue", "yellow"],
         tallRuter:[],
         tall:[]
     },
@@ -438,8 +438,8 @@ let animasjonRekursiv = [
         tall:[]
     },
     {
-        fargeruter:[[1,1], [4,3], [3,2], [1,2]],
-        farge:["yellow", "white", "white", "white"],
+        fargeruter:[[1,1], [1,0], [4,3], [3,2], [1,2], [1,0]],
+        farge:["yellow", "white", "white", "white", "white"],
         tallRuter:[],
         tall:[]
     },
@@ -468,7 +468,7 @@ let animasjonRekursiv = [
         tall:[]
     },
     {
-        fargeruter:[[3,2], [4,2], [3,1]],
+        fargeruter:[[3,2], [4,2], [3,1],],
         farge:["yellow", "white", "white"],
         tallRuter:[],
         tall:[]
@@ -486,8 +486,8 @@ let animasjonRekursiv = [
         tall:[]
     },
     {
-        fargeruter:[[2,2], [4,3], [3,2]],
-        farge:["yellow", "white", "white"],
+        fargeruter:[[2,2], [4,3], [3,2], [2, 1]],
+        farge:["yellow", "white", "white", "white"],
         tallRuter:[],
         tall:[]
     },
@@ -526,8 +526,15 @@ let animasjonRekursiv = [
         farge:["yellow", "white"],
         tallRuter:[],
         tall:[]
+    },
+    {
+        fargeruter:[[1,1], [2,2], [3,3], [4,4], [1, 0], [2, 1], [3, 2], [4, 2]],
+        farge:["white", "white", "white", "white", "lightblue", "lightblue", "lightblue", "lightblue"],
+        tallRuter:[],
+        tall:[]
     }
 ];
 
 animerPyramider("#julie-metode", animasjonJulieMetoden)
 animerPyramider("#julie-metode-sum", animasjonJulieMetodenSum)
+animerPyramider("#rekursivt", animasjonRekursiv, timeoutMs=200)
