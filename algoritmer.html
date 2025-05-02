@@ -55,11 +55,14 @@
         <div id="rekursiv-algoritme">
             <div class="algoritme-forklaring">
                 <h2>Julie-metoden</h2>
-                <p>Ting skjer</p>
+                <p>Algoritmen fungerer slik at den tar utgangspunkt i to pyramider, en vanlig og en med den største summen av rutene under seg. 
+                    For å finne summen bruker den en rekursiv funksjon, men for hver rute, sjekker den om de to rutene under i sumpyramiden er fylt ut. 
+                    Hvis de er det, finner den summen av rutene den har gått gjennom pluss det høyeste tallet av rutene under i sumpyramiden. Summen av tallet i ruten pluss summen av det høyste tallet under lagres i samme rute i sumpyramiden, og neste mulighet sjekkes. Dette hindrer at samme rute blir gått mange ganger.
+                </p>
             </div>
             <div class="algoritme-animasjon">
                 <div class="pyramide-til-algoritme-animasjon">
-                    <div class="pyramide-plassering" id="">
+                    <div class="pyramide-plassering" id="julie-metode">
                         <div class="pyramiderad">
                             <div class="tallrute">1</div>
                         </div>
@@ -86,7 +89,7 @@
                             <div class="tallrute">3</div>
                         </div>
                     </div>
-                    <div class="pyramide-plassering">
+                    <div class="pyramide-plassering" id="julie-metode-sum">
                         <div class="pyramiderad">
                             <div class="tallrute">0</div>
                         </div>
