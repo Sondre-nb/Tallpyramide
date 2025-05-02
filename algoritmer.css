@@ -46,12 +46,14 @@ h2{
 .algoritme-animasjon{
     height: 300px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: right;
 }
 .pyramide-til-algoritme-animasjon{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 .algoritme-forklaring {
     padding: 10px;
@@ -61,4 +63,16 @@ h2{
     justify-content: center;
     flex-direction: column;
     margin: 20px;
+}
+.algoritme-animasjon button {
+    position: absolute;
+    margin: 10px;
+    background-color: #e9d97d;
+    border: 3px solid #ECE4B7;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.algoritme-animasjon button:hover {
+    background-color: #e5da99;
 }

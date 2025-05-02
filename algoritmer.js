@@ -1,29 +1,3 @@
-/* let pyramiderTilAimasjonerEl = document.querySelector(".pyramide-til-algoritme-animasjon");
-let pyramide = []
-
-function lagPyramide(start, slutt, rader) {
-    for (let i = 1; i <= rader; i++) {
-        let rad_liste = []
-        let rad = document.createElement("div")
-        rad.setAttribute("class", "pyramiderad")
-        for (let j = 0; j < i; j++) {
-            let tall = Math.floor(Math.random()*(slutt-start + 1)+start)
-            let rute = document.createElement("div")
-            rute.innerText = tall
-            rute.setAttribute("class", "tallrute")
-            rad_liste.push(tall)
-            rad.appendChild(rute)
-        }
-        pyramide.push(rad_liste)
-        /* for (let algoritme of pyramiderTilAimasjonerEl){
-            algoritme.appendChild(rad)
-        }
-        pyramiderTilAimasjonerEl.appendChild(rad)
-    }
-    console.log("tinger er tegnet")
-}
-
-lagPyramide(1,10,4)*/
 function animerPyramider(pyramideID, animasjonsliste, timeoutMs=1000){
     // Lager en liste med rutene
     let pyramideliste = []
@@ -36,7 +10,6 @@ function animerPyramider(pyramideID, animasjonsliste, timeoutMs=1000){
     // Kjører animasjonen
     for (let i = 0;i<animasjonsliste.length;i++){
         setTimeout(function (){
-            console.log("hei")
             for (let j=0; j<animasjonsliste[i].fargeruter.length;j++){
                 pyramideliste[animasjonsliste[i].fargeruter[j][0]][animasjonsliste[i].fargeruter[j][1]].style.backgroundColor = animasjonsliste[i].farge[j]
             }
@@ -169,8 +142,6 @@ let animasjonerSumOppover = [
         tall:[25]
     }
 ]
-
-animerPyramider("#sumOppover", animasjonerSumOppover)
 
 let animasjonJulieMetoden = [
     {
@@ -438,7 +409,7 @@ let animasjonRekursiv = [
         tall:[]
     },
     {
-        fargeruter:[[1,1], [1,0], [4,3], [3,2], [1,2], [1,0]],
+        fargeruter:[[1,1], [1,0], [4,3], [3,2], [1,2]],
         farge:["yellow", "white", "white", "white", "white"],
         tallRuter:[],
         tall:[]
@@ -535,6 +506,20 @@ let animasjonRekursiv = [
     }
 ];
 
-animerPyramider("#julie-metode", animasjonJulieMetoden)
-animerPyramider("#julie-metode-sum", animasjonJulieMetodenSum)
-animerPyramider("#rekursivt", animasjonRekursiv, timeoutMs=200)
+function velgAnimasjon(e) {
+    let knappID = e.target.id
+    if (knappID == "rekursiv-animasjon-knapp") {
+        animerPyramider("#rekursivt", animasjonRekursiv, timeoutMs=200)
+    } else if (knappID == "julie-animasjon-knapp") {
+        animerPyramider("#julie-metode", animasjonJulieMetoden)
+        animerPyramider("#julie-metode-sum", animasjonJulieMetodenSum)
+    } else {   
+        animerPyramider("#sumOppover", animasjonerSumOppover)
+    }
+}
+
+
+let start_animasjon_knapper = document.querySelectorAll(".animasjonsknapp")
+for (let i = 0; i < start_animasjon_knapper.length; i++) {
+    start_animasjon_knapper[i].addEventListener("click", velgAnimasjon);
+}
