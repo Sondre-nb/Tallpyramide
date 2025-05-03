@@ -56,8 +56,8 @@
         <div id="rekursiv-algoritme">
             <div class="algoritme-forklaring">
                 <h2>Julie-metoden</h2>
-                <p>Algoritmen fungerer slik at den tar utgangspunkt i to pyramider, en vanlig og en med den største summen av rutene under seg. 
-                    For å finne summen bruker den en rekursiv funksjon, men for hver rute, sjekker den om de to rutene under i sumpyramiden er fylt ut. 
+                <p>Algoritmen fungerer slik at den tar utgangspunkt i to pyramider, en vanlig og en med den største summen av rutene under seg.
+                    For å finne summen bruker den en rekursiv funksjon, men for hver rute, sjekker den om de to rutene under i sumpyramiden er fylt ut.
                     Hvis de er det, finner den summen av rutene den har gått gjennom pluss det høyeste tallet av rutene under i sumpyramiden. Summen av tallet i ruten pluss summen av det høyste tallet under lagres i samme rute i sumpyramiden, og neste mulighet sjekkes. Dette hindrer at samme rute blir gått mange ganger.
                 </p>
             </div>
@@ -156,7 +156,17 @@
             </div>
             <div class="algoritme-forklaring">
                 <h2>Sum oppover</h2>
-                <p>Denne kjører gjennom en for-løkke og gjør ting :D</p>
+                <p>
+                    Denne metoden går gjennom pyramiden nedenifr og oppover. Den starter på nest siste rad
+                    og setter verdien til hver rte i den raden til verdien den hadde fra før av pluss den
+                    største verdien til de to rutene under (så om ruten har en verdi på 3 og de to rutene
+                    under har verdiene 1 og 2, vil den få verdien 5). Slik jobber den seg oppover helt til
+                    den har kommet til toppen, og verdien til den øverste ruten vil da være svaret.
+                </p>
+                <p>
+                    Metoden finner ikke index-ene til rutene som bidrar til den største verdien, det er
+                    bare lagt til i animasjonen for å vise hvor verdiene kommer ifra.
+                </p>
             </div>
         </div>
         <script src="algoritmer.js"></script>

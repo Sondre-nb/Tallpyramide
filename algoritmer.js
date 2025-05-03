@@ -1,4 +1,4 @@
-function animerPyramider(pyramideID, animasjonsliste, timeoutMs=1000){
+function animerPyramider(pyramideID, animasjonsliste, timeoutsListe, timeoutMs=1000){
     // Lager en liste med rutene
     let pyramideliste = []
     let pyramiden = document.querySelector(pyramideID)
@@ -7,16 +7,31 @@ function animerPyramider(pyramideID, animasjonsliste, timeoutMs=1000){
         pyramideliste.push(rad.querySelectorAll(".tallrute"))
     }
 
+    // Fjerner pågående animasjoner
+    for (let timeout of timeoutsListe){
+        clearTimeout(timeout)
+    }
+    timeoutsListe.length = 0 // Tømmer listen (liste = [] fungerer ikke fordi bare referansen endres og ikke innholdet)
+
+    // Gjør alle rutene hvite
+    for (let rad of pyramideliste){
+        for (let rute of rad){
+            rute.style.backgroundColor = "white"
+        }
+    }
+
     // Kjører animasjonen
     for (let i = 0;i<animasjonsliste.length;i++){
-        setTimeout(function (){
-            for (let j=0; j<animasjonsliste[i].fargeruter.length;j++){
-                pyramideliste[animasjonsliste[i].fargeruter[j][0]][animasjonsliste[i].fargeruter[j][1]].style.backgroundColor = animasjonsliste[i].farge[j]
-            }
-            for (let j=0; j<animasjonsliste[i].tallRuter.length;j++){
-                pyramideliste[animasjonsliste[i].tallRuter[j][0]][animasjonsliste[i].tallRuter[j][1]].innerHTML = animasjonsliste[i].tall[j]
-            }
-        }, i*timeoutMs)
+        timeoutsListe.push( // Legger til animasjonene i en liste slik at de kan fjernes senere
+            setTimeout(function (){
+                for (let j=0; j<animasjonsliste[i].fargeruter.length;j++){
+                    pyramideliste[animasjonsliste[i].fargeruter[j][0]][animasjonsliste[i].fargeruter[j][1]].style.backgroundColor = animasjonsliste[i].farge[j]
+                }
+                for (let j=0; j<animasjonsliste[i].tallRuter.length;j++){
+                    pyramideliste[animasjonsliste[i].tallRuter[j][0]][animasjonsliste[i].tallRuter[j][1]].innerHTML = animasjonsliste[i].tall[j]
+                }
+            }, i*timeoutMs)
+        )
     }
 }
 
@@ -145,85 +160,85 @@ let animasjonerSumOppover = [
 
 let animasjonJulieMetoden = [
     {
-        fargeruter: [[0,0]], 
+        fargeruter: [[0,0]],
         farge: ["greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[1,0]], 
+        fargeruter: [[1,0]],
         farge: ["greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[2,0]], 
+        fargeruter: [[2,0]],
         farge: ["greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,0]], 
+        fargeruter: [[3,0]],
         farge: ["greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,0], [3,1]], 
+        fargeruter: [[3,0], [3,1]],
         farge: ["white", "greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,1], [2,0], [2,1]], 
+        fargeruter: [[3,1], [2,0], [2,1]],
         farge: ["white", "white", "greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,1]], 
+        fargeruter: [[3,1]],
         farge: ["greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,1], [3,2]], 
+        fargeruter: [[3,1], [3,2]],
         farge: ["white", "greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,2], [2,1], [1,0], [1,1]], 
+        fargeruter: [[3,2], [2,1], [1,0], [1,1]],
         farge: ["white", "white", "white", "greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[2,1]], 
+        fargeruter: [[2,1]],
         farge: ["greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[2,1], [2,2]], 
+        fargeruter: [[2,1], [2,2]],
         farge: ["white", "greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,2]], 
+        fargeruter: [[3,2]],
         farge: ["greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,2], [3,3]], 
+        fargeruter: [[3,2], [3,3]],
         farge: ["white", "greenyellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[0,0], [1,1], [2,2], [3,3]], 
+        fargeruter: [[0,0], [1,1], [2,2], [3,3]],
         farge: ["white", "white", "white", "white"],
         tallRuter: [],
         tall: []
@@ -232,85 +247,85 @@ let animasjonJulieMetoden = [
 
 let animasjonJulieMetodenSum = [
     {
-        fargeruter: [[0,0], [1,0], [1,1]], 
+        fargeruter: [[0,0], [1,0], [1,1]],
         farge: ["greenyellow", "yellow", "yellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[1,0], [1,1], [2,0], [2,1]], 
+        fargeruter: [[1,0], [1,1], [2,0], [2,1]],
         farge: ["greenyellow", "white", "yellow", "yellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[2,0], [2,1], [3,0], [3,1]], 
+        fargeruter: [[2,0], [2,1], [3,0], [3,1]],
         farge: ["greenyellow", "white", "yellow", "yellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,0], [3,1], [4,0], [4,1]], 
+        fargeruter: [[3,0], [3,1], [4,0], [4,1]],
         farge: ["greenyellow", "white", "yellow", "yellow"],
         tallRuter: [[3,0]],
         tall: [8]
     },
     {
-        fargeruter: [[3,0], [3,1], [4,0], [4,2]], 
+        fargeruter: [[3,0], [3,1], [4,0], [4,2]],
         farge: ["white", "greenyellow", "white", "yellow"],
         tallRuter: [[3,1]],
         tall: [7]
     },
     {
-        fargeruter: [[3,1], [2,0], [2,1], [4,1], [4,2], [3,1], [3,2]], 
+        fargeruter: [[3,1], [2,0], [2,1], [4,1], [4,2], [3,1], [3,2]],
         farge: ["white", "white", "greenyellow", "white", "white", "yellow", "yellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,1], [3,2], [4,1], [4,2]], 
+        fargeruter: [[3,1], [3,2], [4,1], [4,2]],
         farge: ["greenyellow", "white", "yellow", "yellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,1], [3,2], [4,1], [4,3]], 
+        fargeruter: [[3,1], [3,2], [4,1], [4,3]],
         farge: ["white", "greenyellow", "white", "yellow"],
         tallRuter: [[3,2]],
         tall: [14]
     },
     {
-        fargeruter: [[3,2], [2,1], [1,0], [1,1], [4,2], [4,3], [2,2]], 
+        fargeruter: [[3,2], [2,1], [1,0], [1,1], [4,2], [4,3], [2,2]],
         farge: ["white", "yellow", "white", "greenyellow", "white", "white", "yellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[2,1], [2,2], [3,1], [3,2]], 
+        fargeruter: [[2,1], [2,2], [3,1], [3,2]],
         farge: ["greenyellow", "white", "yellow", "yellow"],
         tallRuter: [[2,1]],
         tall: [21]
     },
     {
-        fargeruter: [[2,1], [2,2], [3,1], [3,3]], 
+        fargeruter: [[2,1], [2,2], [3,1], [3,3]],
         farge: ["white", "greenyellow", "white", "yellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,2], [3,3], [4,2], [4,3]], 
+        fargeruter: [[3,2], [3,3], [4,2], [4,3]],
         farge: ["greenyellow", "white", "yellow", "yellow"],
         tallRuter: [],
         tall: []
     },
     {
-        fargeruter: [[3,2], [3,3], [4,2], [4,4]], 
+        fargeruter: [[3,2], [3,3], [4,2], [4,4]],
         farge: ["white", "greenyellow", "white", "yellow"],
         tallRuter: [[3,3]],
         tall: [8]
     },
     {
-        fargeruter: [[0,0], [1,1], [2,2], [3,3], [4,3], [4,4]], 
+        fargeruter: [[0,0], [1,1], [2,2], [3,3], [4,3], [4,4]],
         farge: ["white", "white", "white", "white", "white", "white"],
         tallRuter: [],
         tall: []
@@ -409,8 +424,8 @@ let animasjonRekursiv = [
         tall:[]
     },
     {
-        fargeruter:[[1,1], [1,0], [4,3], [3,2], [1,2]],
-        farge:["yellow", "white", "white", "white", "white"],
+        fargeruter:[[1,1], [1,0], [4,3], [3,2]],
+        farge:["yellow", "white", "white", "white"],
         tallRuter:[],
         tall:[]
     },
@@ -506,18 +521,22 @@ let animasjonRekursiv = [
     }
 ];
 
+let timeoutsTilRekursiv = []
+let timeoutsTilJulieMetode = []
+let timeoutsTilJulieMetodeSum = []
+let timeoutsTilSumOppover = []
+
 function velgAnimasjon(e) {
     let knappID = e.target.id
     if (knappID == "rekursiv-animasjon-knapp") {
-        animerPyramider("#rekursivt", animasjonRekursiv, timeoutMs=200)
+        animerPyramider("#rekursivt", animasjonRekursiv, timeoutsTilRekursiv, timeoutMs=200)
     } else if (knappID == "julie-animasjon-knapp") {
-        animerPyramider("#julie-metode", animasjonJulieMetoden)
-        animerPyramider("#julie-metode-sum", animasjonJulieMetodenSum)
-    } else {   
-        animerPyramider("#sumOppover", animasjonerSumOppover)
+        animerPyramider("#julie-metode", animasjonJulieMetoden, timeoutsTilJulieMetode)
+        animerPyramider("#julie-metode-sum", animasjonJulieMetodenSum, timeoutsTilJulieMetodeSum)
+    } else {
+        animerPyramider("#sumOppover", animasjonerSumOppover, timeoutsTilSumOppover)
     }
 }
-
 
 let start_animasjon_knapper = document.querySelectorAll(".animasjonsknapp")
 for (let i = 0; i < start_animasjon_knapper.length; i++) {
