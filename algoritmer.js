@@ -1,9 +1,11 @@
+// Hvordan eksempel-pyramidene originalt skal se ut
 let eksempelpyramide = [[1],
                         [3,2],
                         [4,7,1],
                         [3,1,8,5],
                         [5,2,6,2,3]]
 
+// Hvordan den andre pyramiden som lagrer summene i Juliemetoden skal se ut
 let eksempelpyramideJulieMetodeSum =  [[0],
                                     [0,0],
                                     [0,0,0],
@@ -19,6 +21,7 @@ function resetTallIPyramide(ID){
         fasit = eksempelpyramideJulieMetodeSum
     }
 
+    // Går gjennom hver rute og setter verdien til verdien til tilsvarende plass i fasit-listen
     let pyr = document.querySelector(ID)
     let rader = pyr.querySelectorAll(".pyramiderad")
     for (let i=0; i<rader.length;i++){
@@ -29,7 +32,7 @@ function resetTallIPyramide(ID){
     }
 }
 
-function animerPyramider(pyramideID, animasjonsliste, timeoutsListe, timeoutMs=1000){
+function animerPyramider(pyramideID, animasjonsliste, timeoutsListe, timeoutMs=700){
     // Lager en liste med rutene
     let pyramideliste = []
     let pyramiden = document.querySelector(pyramideID)
@@ -57,9 +60,11 @@ function animerPyramider(pyramideID, animasjonsliste, timeoutsListe, timeoutMs=1
     for (let i = 0;i<animasjonsliste.length;i++){
         timeoutsListe.push( // Legger til animasjonene i en liste slik at de kan fjernes senere
             setTimeout(function (){
+                // Endrer bakgrunnsfarge
                 for (let j=0; j<animasjonsliste[i].fargeruter.length;j++){
                     pyramideliste[animasjonsliste[i].fargeruter[j][0]][animasjonsliste[i].fargeruter[j][1]].style.backgroundColor = animasjonsliste[i].farge[j]
                 }
+                // Endrer tall-verdi
                 for (let j=0; j<animasjonsliste[i].tallRuter.length;j++){
                     pyramideliste[animasjonsliste[i].tallRuter[j][0]][animasjonsliste[i].tallRuter[j][1]].innerHTML = animasjonsliste[i].tall[j]
                 }
@@ -68,6 +73,7 @@ function animerPyramider(pyramideID, animasjonsliste, timeoutsListe, timeoutMs=1
     }
 }
 
+// Liste med animasjoner til SumOppover-metoden
 let animasjonerSumOppover = [
     {
         fargeruter:[[3,0], [4,0], [4,1]],
@@ -191,6 +197,7 @@ let animasjonerSumOppover = [
     }
 ]
 
+// Liste med animasjoner til Juliemetoden (den originale pyramiden)
 let animasjonJulieMetoden = [
     {
         fargeruter: [[0,0]],
@@ -277,7 +284,7 @@ let animasjonJulieMetoden = [
         tall: []
     }
 ]
-
+// Liste med animasjoner til den andre pyramiden i Juliemetoden
 let animasjonJulieMetodenSum = [
     {
         fargeruter: [[0,0], [1,0], [1,1]],
@@ -365,6 +372,7 @@ let animasjonJulieMetodenSum = [
     }
 ]
 
+// Liste med animasjoner til rekursiv-metoden
 let animasjonRekursiv = [
     {
         fargeruter:[[0,0], [1,0]],
@@ -560,10 +568,11 @@ let timeoutsTilJulieMetode = []
 let timeoutsTilJulieMetodeSum = []
 let timeoutsTilSumOppover = []
 
+// Kjører animasjon til riktig pyramide når "start animasjon"-knappen trykkes
 function velgAnimasjon(e) {
     let knappID = e.target.id
     if (knappID == "rekursiv-animasjon-knapp") {
-        animerPyramider("#rekursivt", animasjonRekursiv, timeoutsTilRekursiv, timeoutMs=200)
+        animerPyramider("#rekursivt", animasjonRekursiv, timeoutsTilRekursiv, timeoutMs=300)
     } else if (knappID == "julie-animasjon-knapp") {
         animerPyramider("#julie-metode", animasjonJulieMetoden, timeoutsTilJulieMetode)
         animerPyramider("#julie-metode-sum", animasjonJulieMetodenSum, timeoutsTilJulieMetodeSum)
@@ -572,6 +581,7 @@ function velgAnimasjon(e) {
     }
 }
 
+// Legger til eventListeners på animasjonsknappene
 let start_animasjon_knapper = document.querySelectorAll(".animasjonsknapp")
 for (let i = 0; i < start_animasjon_knapper.length; i++) {
     start_animasjon_knapper[i].addEventListener("click", velgAnimasjon);
