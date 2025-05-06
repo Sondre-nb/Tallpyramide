@@ -1,0 +1,68 @@
+/* Hovedelementet som inneholder pyramiden og all statestikken*/
+#main-container {
+    display: grid;
+    grid-template-areas:
+            "h p s"
+            "i p s"
+            "m p s"
+            "t p s";
+    grid-template-columns: 1fr 50% 1fr;
+    grid-template-rows: 1fr 1fr auto auto;
+    gap: 10px;
+    width: 100%;
+    height: 500px;
+    padding: 10px;
+}
+#main-container > div, a {
+    background-color: #F39A9D;
+    padding: 5px;
+}
+#main-container a:hover {
+    background-color: #F7AAAC;
+}
+
+/* Den store pyramiden i midten av skjermen */
+/* Pyramide og endre søk knappene */
+#pyramidefelt {
+    grid-area: p;
+    display: flex;
+    justify-content: right;
+}
+#type-søk-knapper {
+    background-color: white;
+    width: 200px;
+    padding: 5px;
+    position: absolute;
+    margin: 5px;
+    text-align: center;
+}
+
+/* Statestikk søylediagram */
+#hastighet-graf {
+    grid-area: h;
+}
+#iterasjon-graf {
+    grid-area: i;
+}
+
+/* Statestikk tekstfelt */
+#statistikk {
+    grid-area: s;
+}
+#statistikk-boks {
+    background-color: white;
+    padding: 15px;
+    margin: 5px;
+}
+#statistikk-boks ul {
+    padding-left: 20px;
+    list-style-type: square;
+}
+
+/* Videre knapper */
+#tilbake {
+    grid-area: t;
+}
+#mer-om-algoritme {
+    grid-area: m;
+}

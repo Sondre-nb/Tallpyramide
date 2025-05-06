@@ -1,38 +1,17 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    font-family: "Saira", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
-}
-header{
-    position: fixed;
-    margin: 0;
-    height: 80px;
-    width: 100%;
-    background-color: #6DB1BF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    z-index: 5;
-}
-header h1 {
-    font-weight: 400;
-}
-
+/* Hoved view */
 main{
-    padding-top: 105px;
-    padding-bottom: 25px;
+    padding-top: 105px; /* 80px for header + 25px for margin */
+    padding-bottom: 25px; /* 25px for margin */
     background-color: #FFEAEC;
     display: flex;
     flex-direction: column;
 }
 
+h2{
+    padding: 5px;
+}
+
+/* Algoritme-animasjon containeren*/
 main > div{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -40,29 +19,12 @@ main > div{
     margin-block: 25px;
     background-color: #F39A9D;
 }
-h2{
-    padding: 5px;
-}
+
+/* Algoritme-animasjon, gjenbrukt container */
 .algoritme-animasjon{
     height: 300px;
     display: flex;
     justify-content: right;
-}
-.pyramide-til-algoritme-animasjon{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-.algoritme-forklaring {
-    padding: 10px;
-}
-.pyramide-plassering {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 20px;
 }
 .algoritme-animasjon button {
     position: absolute;
@@ -72,7 +34,28 @@ h2{
     padding: 5px;
     border-radius: 10px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 .algoritme-animasjon button:hover {
     background-color: #e5da99;
+    transform: scaleX(1.05);
+}
+
+/* Componenter inne i algoritme-animasjon containeren*/
+.algoritme-forklaring {
+    padding: 10px;
+}
+
+.pyramide-til-algoritme-animasjon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.pyramide-plassering {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px;
 }
