@@ -80,6 +80,7 @@ function finnRute2(plass, rad, verdi, plassering){
 }
 
 function storste(a,b){
+    // Returnerer største av to verdier
     if (a > b){
         return a
     } else {
@@ -87,28 +88,33 @@ function storste(a,b){
     }
 }
 
-function finnHoyesteVedLokke(pyr){
+function sumOppover(pyr){
     // Kopierer liste og ikke bare referansen siden den blir endret på
     let trekant = []
     for (let linje of pyr){
         trekant.push(Array.from(linje))
     }
-    //let iterasjoner = 0
+    // Går gjennom listen nedenifra og oppover og setter verdien til ruten til verdien den hadde fra
+    // før pluss den største av verdiene under
     for (let i = trekant.length-2;i>=0;i--){
         for (let j = 0; j<trekant[i].length;j++){
             iterasjoner_sum_oppover++;
             trekant[i][j] += storste(trekant[i+1][j], trekant[i+1][j+1])
         }
     }
+    // Returnerer den øverste ruten, som har svaret på oppgaven når programmet har jobbet seg helt til toppen
     return trekant[0][0]
 }
 
-function finnBesteSti(rad, index){
+function rekursivt(rad, index){
+    // Finner svaret rekursivt
+    // Returnerer den største av de to verdiene under pluss sin egen verdi, som man finner ved ved å
+    // kalle på denne funksjonen helt til man når bunnen av pyramiden, da returneres verdien til ruten
     iterasjoner_rekursiv++;
     let sum = pyramide[rad][index]
     if (rad < pyramide.length - 1){
-        let sum_venstre = finnBesteSti(rad+1, index)
-        let sum_hoyre = finnBesteSti(rad+1, index+1)
+        let sum_venstre = rekursivt(rad+1, index)
+        let sum_hoyre = rekursivt(rad+1, index+1)
         if (sum_venstre > sum_hoyre){
             sum += sum_venstre
         } else {
@@ -166,6 +172,7 @@ function lagPyramide(start, slutt, rader) {
     }
 }
 
+// Oppretter en liste som skal lagre alle timeOuts-ene slik at de kan avsluttes midt i en animasjon
 let animasjontimeouts = []
 
 function fargelegg(plasseringer) {
@@ -175,6 +182,7 @@ function fargelegg(plasseringer) {
     }
     animasjontimeouts = []
 
+    // Animerer fargelegging av trekanten
     let rader = document.querySelectorAll(".pyramiderad")
     for (let i = 0; i < pyramide.length; i++) {
         animasjontimeouts.push( // Legger til alle timeoutene i en liste slik at de kan bli fjernet midt i animasjonen
@@ -182,8 +190,8 @@ function fargelegg(plasseringer) {
                 let rute = rader[i].querySelectorAll("div")[plasseringer[i]]
                 for (let j = 1; j<=100; j++){
                     rute.style.color = tekstfargeRiktigeRuter
-                    animasjontimeouts.push(
-                        setTimeout(function(){
+                    animasjontimeouts.push( // Legger til i liste for at animasjonen skal kunne bli stoppet
+                        setTimeout(function(){ // Gjør at rutene blir gradvis fargelagt
                             rute.style.background = "linear-gradient(0deg,white " +(100-j)+"%," + farge +" "+(100-j)+"%)"
                         }, 5*j)
                     )
@@ -257,7 +265,14 @@ function lagSektordiagram() {
     }
 }
 
+// Henter verdier fra localStorage
+let antall_rader = Number(localStorage.getItem("raderlagring"))
+let intervall_bunn = Number(localStorage.getItem("startlagring"))
+let intervall_topp = Number(localStorage.getItem("sluttlagring"))
+let farge = localStorage.getItem("fargelagring")
+
 function fraHexTilRGBListe(hex){
+    // Gjør om farge fra hex til rgb
     rgb = [0,0,0]
     for (let i=1;i<hex.length;i++){
         let value
@@ -276,6 +291,7 @@ function fraHexTilRGBListe(hex){
         } else {
             value = Number(hex[i])
         }
+
         if (i%2 != 0){
             rgb[Math.floor((i-1)/2)] += value*16
         } else{
@@ -286,6 +302,7 @@ function fraHexTilRGBListe(hex){
 }
 
 function fraTiTilSekstenTallsSystem(titall){
+    // Gjør om et tall fra titalsssystem til hex
     if (titall == 10){
         return "a"
     } else if (titall == 11){
@@ -304,6 +321,7 @@ function fraTiTilSekstenTallsSystem(titall){
 }
 
 function fraRGBListeTilHex(rgb){
+    // Gjør om fra rgb til hex
     let hex = "#"
     for(let primerfarge of rgb){
         let seksten_plass = Math.floor(primerfarge/16)
@@ -314,38 +332,31 @@ function fraRGBListeTilHex(rgb){
     return hex
 }
 
-let antall_rader = Number(localStorage.getItem("raderlagring"))
-let intervall_bunn = Number(localStorage.getItem("startlagring"))
-let intervall_topp = Number(localStorage.getItem("sluttlagring"))
-let farge = localStorage.getItem("fargelagring")
 
-let minsteVerdi = antall_rader * intervall_topp
-
-// Velger passende tekstfarge til rutene som skal endre farge (baseres på brukerens farge)
-let farge_som_rgb = fraHexTilRGBListe(farge)
-/* for (let i = 0; i < farge_som_rgb.length; i++){
-    farge_som_rgb[i] = 255-farge_som_rgb[i]
-
-} */
-
-function luminesens([r, g, b]) { // Magisk lumeninesens-utregning
+function luminesens([r, g, b]) { // Magisk lumeninesens-utregning hentet fra nettet
     return (0.299 * r + 0.587 * g + 0.114 * b)/255
 }
 
 function forskjellLumin(rgb1, rgb2) {
+    // FInner froskjellen i luminesens mellom to farger
     let farge1 = luminesens(rgb1);
     let farge2 = luminesens(rgb2);
-    return Math.max(farge1, farge2) - Math.min(farge1, farge2);
+    return Math.abs(farge1-farge2) //Math.max(farge1, farge2) - Math.min(farge1, farge2);
 }
 function finnBesteFargeTilfeldig(bakgrunnRGB, antallForsok = 30) {
+    // Går gjennom antallForsok tilfeldige farger og returnerer den
+    // fargen som har størst forskjell i luminensens med bakgrunnsfargen
     let bestKontrast = 0;
     let bestFarge = [0, 0, 0];
 
     for (let i = 0; i < antallForsok; i++) {
+        // Lager en tilfeldig farge
         let r = Math.floor(Math.random() * 256);
         let g = Math.floor(Math.random() * 256);
         let b = Math.floor(Math.random() * 256);
+
         let kontrast = forskjellLumin(bakgrunnRGB, [r, g, b]);
+        // Lagrer fargen om den har størst forskjell i luminesens hittil
         if (kontrast > bestKontrast) {
             bestKontrast = kontrast;
             bestFarge = [r, g, b];
@@ -355,8 +366,11 @@ function finnBesteFargeTilfeldig(bakgrunnRGB, antallForsok = 30) {
     return bestFarge;
 }
 
+let farge_som_rgb = fraHexTilRGBListe(farge)
+// Velger passende tekstfarge til rutene som skal endre farge (baseres på brukerens farge)
 let tekstfargeRiktigeRuter = fraRGBListeTilHex(finnBesteFargeTilfeldig(farge_som_rgb))
 
+let minsteVerdi = antall_rader * intervall_topp
 
 lagPyramide(intervall_bunn,intervall_topp,antall_rader)
 // finnRute2(0,0,0,[0])
@@ -379,15 +393,7 @@ for (let i = 0; i < søkKnapperEl.length; i++) {
 
 fargelegg(plasseringer)
 
-console.log(pyramide)
-console.log(sumPyramide)
-console.log(plassPyramide)
-console.log(plasseringer)
-console.log(høyesteVerdi)
-
 lagSektordiagram()
-console.log(summer)
-console.log(navn_kategorier_sektordiagram)
 
 let bitfarger = [
   "#9467CB",
@@ -413,28 +419,28 @@ new Chart("sumfordelingsdiagram", {
   }
 });
 
+// Antall repitisjoner påvirkes av antall rader for at kjøringen ikke skal ta for lang tid,
+// men samtidig har nok iterasjoner når funksjonene tar kortere tid
 let repetisjoner = Math.floor(10000/antall_rader)
 let hastigheter = [];
 let iterasjoner = [];
 
-let iterasjoner_rekursiv = 0;
+// Tar tiden og finner iterasjoner til rekursivt
+let iterasjoner_rekursiv
 let t0 = performance.now();
-for (let i=0;i<repetisjoner;i++){
+for (let i=0;i<repetisjoner;i++){ // Kjører flere ganger og tar gjennomsnittet for mer nøyaktig svar
     iterasjoner_rekursiv = 0;
-    //console.time("Rek")
-    finnBesteSti(0,0)
-    //console.timeEnd("Rek")
+    rekursivt(0,0)
 }
 let t1 = performance.now();
 hastigheter.push((t1-t0)/repetisjoner)
 iterasjoner.push(iterasjoner_rekursiv)
 
-let iterasjoner_julie_metoden = 0;
+// Tar tiden og finner iterasjoner til Juliemetoden
+let iterasjoner_julie_metoden
 t0 = performance.now()
-console.log(sumPyramide, "hie")
-for (let i=0;i<repetisjoner;i++){
+for (let i=0;i<repetisjoner;i++){ // Kjører flere ganger og tar gjennomsnittet for mer nøyaktig svar
     iterasjoner_julie_metoden = 0;
-    //console.time("Julie")
     // Lager sumPyramide
     sumPyramide = [Array.from(pyramide[pyramide.length-1])]
     for (let i = pyramide.length-2; i>=0;i--){
@@ -444,28 +450,24 @@ for (let i=0;i<repetisjoner;i++){
         ]
         sumPyramide.unshift(rad)
     }
-    console.log(sumPyramide, "hei")
     finnRute2(0,0,0,[0])
-    //console.timeEnd("Julie")
 }
 t1 = performance.now();
 hastigheter.push((t1-t0)/repetisjoner)
 iterasjoner.push(iterasjoner_julie_metoden)
 
-let iterasjoner_sum_oppover = 0;
+
+// Tar tiden og finner iterasjoner til sumOppover
+let iterasjoner_sum_oppover
 t0 = performance.now()
-for (let i=0;i<repetisjoner;i++){
+for (let i=0;i<repetisjoner;i++){ // Kjører flere ganger og tar gjennomsnittet for mer nøyaktig svar
     iterasjoner_sum_oppover = 0;
-    //console.time("lokke")
-    finnHoyesteVedLokke(pyramide)
-    //console.timeEnd("lokke")
+    sumOppover(pyramide)
 }
 t1 = performance.now();
 hastigheter.push((t1-t0)/repetisjoner)
 iterasjoner.push(iterasjoner_sum_oppover)
 
-console.log(hastigheter)
-console.log(iterasjoner)
 
 let x_verdier = ["Rekursiv", "Julie-metoden", "Sum oppover"];
 let stolpefarger = ["#9467CB", "#6DB1BF","#ECE4B7"];

@@ -1,3 +1,4 @@
+/* Generell stil for hele siden */
 * {
     margin: 0px;
     padding: 0px;
@@ -9,6 +10,25 @@
     font-variation-settings:
         "wdth" 100;
 }
+body {
+    background-color: #FFEAEC;
+}
+main{
+    padding-top: 80px; /* Standardpadding, noen sider endrer på denne */
+}
+
+input, label, p {
+    margin: 5px;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+header a {
+    background-color: #6db1bf00;
+}
+
+/* Stil for header, title bar */
 header {
     position: fixed;
     margin: 0;
@@ -25,56 +45,34 @@ header h1 {
     font-weight: 400;
 }
 
-body {
-    background-color: #FFEAEC;
+/* Tilbakeknapp i header */
+#tilbake-knapp {
+    position: absolute;
+    left: 20px;
+    background-color: #e9d97d;
+    border: 3px solid #ECE4B7;
+    padding: 3px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#tilbake-knapp:hover {
+    background-color: #e5da99;
+    transform: scaleX(1.05);
 }
 
-main{
-    padding-top: 80px;
-}
-
-input, label, p {
+/* Rutene inne i pyramidene */
+.tallrute {
     margin: 5px;
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#main-container {
-    display: grid;
-    grid-template-areas:
-            "h p s"
-            "i p s"
-            "m p s"
-            "t p s";
-    grid-template-columns: 1fr 50% 1fr;
-    grid-template-rows: 1fr 1fr auto auto;
-    gap: 10px;
-    width: 100%;
-    height: 500px;
-    padding: 10px;
-}
-#main-container > div, a {
-    background-color: #F39A9D;
-    padding: 5px;
-}
-#main-container a:hover {
-    background-color: #F7AAAC;
-}
-#hastighet-graf {
-    grid-area: h;
-}
-#iterasjon-graf {
-    grid-area: i;
-}
-#tilbake {
-    grid-area: t;
-}
-#mer-om-algoritme {
-    grid-area: m;
-}
-#pyramidefelt {
-    grid-area: p;
-    display: flex;
-    justify-content: right;
-}
+/* Generell stil for alle pyramider */
 #pyramide {
     display: flex;
     flex-direction: column;
@@ -86,43 +84,4 @@ input, label, p {
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-#statistikk {
-    grid-area: s;
-}
-.tallrute {
-    margin: 5px;
-    background-color: white;
-    height: 30px;
-    width: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.riktigrute {
-    background-color: greenyellow;
-}
-#statistikk-boks {
-    background-color: white;
-    padding: 15px;
-    margin: 5px;
-}
-#statistikk-boks ul {
-    padding-left: 20px;
-    list-style-type: square;
-}
-#type-søk-knapper {
-    background-color: white;
-    width: 200px;
-    padding: 5px;
-    position: absolute;
-    margin: 5px;
-    text-align: center;
-}
-a {
-    text-decoration: none;
-    color: black;
-}
-header a {
-    background-color: #6db1bf00;
 }

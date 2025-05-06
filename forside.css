@@ -1,10 +1,13 @@
+/* Hoved view */
 main{
+    /* Inhereter padding-top 80px fra style.css */
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
 }
 
+/* Hoved elementet midt på siden */
 #instillingsboks{
     width: 80%;
     height: 65%;
@@ -15,19 +18,18 @@ main{
     justify-items: center;
     align-items: center;
 }
-
 #instillingsboks > h2{
     flex-grow: 1;
     font-size: 32px;
     margin-top: 10px;
 }
 
+/* Holder sliderene som brukes til å velge parametere */
 #alternativer{
     display: flex;
     flex-direction: row;
     flex-grow: 1;
 }
-
 #alternativer > div{
     display: flex;
     flex-direction: column;
@@ -35,10 +37,7 @@ main{
     margin: 25px;
 }
 
-#feil-tekst{
-    margin-bottom: 40px;
-}
-
+/* Gå videre knapp inne i instillingsboks */
 #start-knapp{
     padding: 7px 14px;
     font-size: 20px;
@@ -53,4 +52,9 @@ main{
     background-color: #61a3b0;
     cursor: pointer;
     transform: scale(1.04);
+}
+
+/* Om startveriden er lavere enn sluttveriden vises denne*/
+#feil-tekst{
+    margin-bottom: 40px;
 }
