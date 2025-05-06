@@ -1,3 +1,34 @@
+let eksempelpyramide = [[1],
+                        [3,2],
+                        [4,7,1],
+                        [3,1,8,5],
+                        [5,2,6,2,3]]
+
+let eksempelpyramideJulieMetodeSum =  [[0],
+                                    [0,0],
+                                    [0,0,0],
+                                    [0,0,0,0],
+                                    [5,2,6,2,3]]
+
+function resetTallIPyramide(ID){
+    // Velger hvilken pyramide den skal resete seg til
+    let fasit
+    if (ID != "#julie-metode-sum"){
+        fasit = eksempelpyramide
+    } else {
+        fasit = eksempelpyramideJulieMetodeSum
+    }
+
+    let pyr = document.querySelector(ID)
+    let rader = pyr.querySelectorAll(".pyramiderad")
+    for (let i=0; i<rader.length;i++){
+        let ruter = rader[i].querySelectorAll(".tallrute")
+        for (let j=0; j<ruter.length;j++){
+            ruter[j].innerHTML = fasit[i][j]
+        }
+    }
+}
+
 function animerPyramider(pyramideID, animasjonsliste, timeoutsListe, timeoutMs=1000){
     // Lager en liste med rutene
     let pyramideliste = []
@@ -12,6 +43,8 @@ function animerPyramider(pyramideID, animasjonsliste, timeoutsListe, timeoutMs=1
         clearTimeout(timeout)
     }
     timeoutsListe.length = 0 // Tømmer listen (liste = [] fungerer ikke fordi bare referansen endres og ikke innholdet)
+
+    resetTallIPyramide(pyramideID) // Reseter tallene i pyramiden
 
     // Gjør alle rutene hvite
     for (let rad of pyramideliste){
@@ -521,6 +554,7 @@ let animasjonRekursiv = [
     }
 ];
 
+// Lister for å kunne stoppe pågående animasjoner
 let timeoutsTilRekursiv = []
 let timeoutsTilJulieMetode = []
 let timeoutsTilJulieMetodeSum = []
