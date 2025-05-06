@@ -1,7 +1,7 @@
 /* Hoved view */
 main{
-    padding-top: 105px; /* 80px for header + 25px for margin */
-    padding-bottom: 25px; /* 25px for margin */
+    padding-top: 105px; /* 80px for header + 25px for plass over boksene med info */
+    padding-bottom: 25px; /* 25px for plass under boksene */
     background-color: #FFEAEC;
     display: flex;
     flex-direction: column;
