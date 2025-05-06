@@ -1,4 +1,4 @@
-/* Hoved view */
+/* Flex og padding i hovedområde */
 main{
     padding-top: 105px; /* 80px for header + 25px for plass over boksene med info */
     padding-bottom: 25px; /* 25px for plass under boksene */
@@ -20,12 +20,15 @@ main > div{
     background-color: #F39A9D;
 }
 
+
 /* Algoritme-animasjon, gjenbrukt container */
 .algoritme-animasjon{
     height: 300px;
     display: flex;
     justify-content: right;
 }
+
+/* Start-animasjons-knapp */
 .algoritme-animasjon button {
     position: absolute;
     margin: 10px;
@@ -36,6 +39,7 @@ main > div{
     cursor: pointer;
     transition: all 0.3s ease;
 }
+/* Hover-effekt på knapp */
 .algoritme-animasjon button:hover {
     background-color: #e5da99;
     transform: scaleX(1.05);
