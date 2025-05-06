@@ -1,4 +1,5 @@
-*{
+/* Felles font på nettside og annen felles styling */
+* {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
@@ -9,7 +10,9 @@
     font-variation-settings:
         "wdth" 100;
 }
-header{
+
+/* Header */
+header {
     position: fixed;
     margin: 0;
     height: 80px;
@@ -25,7 +28,8 @@ header h1 {
     font-weight: 400;
 }
 
-main{
+/* Flex og padding i hovedområde */
+main {
     padding-top: 105px;
     padding-bottom: 25px;
     background-color: #FFEAEC;
@@ -33,6 +37,7 @@ main{
     flex-direction: column;
 }
 
+/* Inndelingene med algoritme-info */
 main > div{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -40,14 +45,17 @@ main > div{
     margin-block: 25px;
     background-color: #F39A9D;
 }
+/* Underoverskrifter */
 h2{
     padding: 5px;
 }
+/* Div med pyramide og knapp */
 .algoritme-animasjon{
     height: 300px;
     display: flex;
     justify-content: right;
 }
+/* Div med pyramide(r) */
 .pyramide-til-algoritme-animasjon{
     display: flex;
     flex-direction: row;
@@ -55,15 +63,18 @@ h2{
     justify-content: center;
     width: 100%;
 }
+/* Tekst om algoritmer */
 .algoritme-forklaring {
     padding: 10px;
 }
+/* Div for hver enkelt pyramide */
 .pyramide-plassering {
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin: 20px;
 }
+/* Start-animasjons-knapp */
 .algoritme-animasjon button {
     position: absolute;
     margin: 10px;
@@ -73,6 +84,7 @@ h2{
     border-radius: 10px;
     cursor: pointer;
 }
+/* Hover-effekt på knapp */
 .algoritme-animasjon button:hover {
     background-color: #e5da99;
 }

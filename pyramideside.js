@@ -1,59 +1,81 @@
+// Definerer verdier og lister for å finne høyest verdi
 let plasseringer;
 let lavestePlasseringer;
 let høyesteVerdi = 0;
 let summer = [];
 let pyramide = [];
-let sumPyramide = [];
-let plassPyramide = [];
-let pyramideEl = document.querySelector("#pyramide");
+let sumPyramide = [];   // Lagrer summer oppover
+let plassPyramide = []; // Lagrer plassering med høyest verdi oppover
+let pyramideEl = document.querySelector("#pyramide");   // Pyramide
 
 let hastighet_liste = []
 let iterasjonsliste = []
 
+// Rekursiv funksjon som sjekker alle muligheter
+// Brukes ikke direkte i koden for å sammenlikne, men brukes til å finne plasseringer for høyeste og laveste rute, og til å finne alle summer
+// Plass: plassering til rute som sjekkes
+// Rad: rad til rute
+// Verdi: total sum ned til den ruten
+// Plassering: liste med plasseringene som er gått gjennom 
 function finnRute(plass, rad, verdi, plassering){
     if (rad < pyramide.length - 1) {
+        // Finner verdien til hver av rutene under
         finnRute(plass, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass]))
         finnRute(plass+1, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass+1]))
     } else {
+        // Sjekker om summen på bunnen er større enn høyeste sum
         if (verdi + pyramide[rad][plass] > høyesteVerdi) {
             høyesteVerdi = verdi + pyramide[rad][plass];
             plasseringer = plassering;
         }
+        // Sjekker om summen på bunnen er lavere enn minste sum
         if (verdi + pyramide[rad][plass] < minsteVerdi) {
             minsteVerdi = verdi + pyramide[rad][plass];
             lavestePlasseringer = plassering;
         }
+        // Legger til summen i en liste med alle mulige summer som brukes i sektordiagram
         summer.push(verdi + pyramide[rad][plass])
     }
 }
 
+// Sjekker verdier til finnRute2
 function sjekkVerdi(verdi, plassering) {
+    // Sjekker om sum er større enn høyeste sum
     if (verdi > høyesteVerdi) {
         høyesteVerdi = verdi
+        // Lagrer plasseringene til rutene
         plasseringer = plassering
     }
 }
 
+// Rekursiv funksjon som ikke sjekker samme ruter mange ganger på rad
+// Plass: plassering til rute som sjekkes
+// Rad: rad til rute
+// Verdi: total sum ned til den ruten
+// Plassering: liste med plasseringene som er gått gjennom 
 function finnRute2(plass, rad, verdi, plassering){
+    // Teller antall iterasjoner for statistikk
     iterasjoner_julie_metoden++;
-
-    if (rad < pyramide.length - 1) {
-        if (sumPyramide[rad+1][plass] != 0 && sumPyramide[rad+1][plass+1] != 0) {
-            if (sumPyramide[rad+1][plass] > sumPyramide[rad+1][plass+1]) {
-                sumPyramide[rad][plass] = pyramide[rad][plass] + sumPyramide[rad+1][plass]
-                plassPyramide[rad][plass] = [plass].concat(plassPyramide[rad+1][plass])
-                sjekkVerdi(verdi + sumPyramide[rad+1][plass] + pyramide[rad][plass], plassering.concat(plassPyramide[rad+1][plass]))
-            } else {
-                sumPyramide[rad][plass] = pyramide[rad][plass] + sumPyramide[rad+1][plass+1]
-                plassPyramide[rad][plass] = [plass].concat(plassPyramide[rad+1][plass+1])
-                sjekkVerdi(verdi + sumPyramide[rad+1][plass+1] + pyramide[rad][plass], plassering.concat(plassPyramide[rad+1][plass+1]))
-            }
+    // Sjekker om begge rutene under rute er tomme i sum-pyramide
+    if (sumPyramide[rad+1][plass] != 0 && sumPyramide[rad+1][plass+1] != 0) {
+        // Finner den største summen av de under
+        if (sumPyramide[rad+1][plass] > sumPyramide[rad+1][plass+1]) {
+            // Oppdaterer tilsvarende rute i sum-pyramide med største sum under og egen verdi
+            sumPyramide[rad][plass] = pyramide[rad][plass] + sumPyramide[rad+1][plass]
+            // Oppdaterer tilsvarende rute i plass-pyramide med plasseringene fra største sum under og egen plassering
+            plassPyramide[rad][plass] = [plass].concat(plassPyramide[rad+1][plass])
+            // Sjekker om verdien i ruten pluss høyeste sum under er høyrere enn høyeste verdi 
+            sjekkVerdi(verdi + sumPyramide[rad+1][plass] + pyramide[rad][plass], plassering.concat(plassPyramide[rad+1][plass]))
         } else {
-            finnRute2(plass, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass]))
-            finnRute2(plass+1, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass + 1]))
+            // Samme som over, men for motsatt rute
+            sumPyramide[rad][plass] = pyramide[rad][plass] + sumPyramide[rad+1][plass+1]
+            plassPyramide[rad][plass] = [plass].concat(plassPyramide[rad+1][plass+1])
+            sjekkVerdi(verdi + sumPyramide[rad+1][plass+1] + pyramide[rad][plass], plassering.concat(plassPyramide[rad+1][plass+1]))
         }
     } else {
-        sjekkVerdi(verdi + pyramide[rad][plass], plassering)
+        // Sjekker rutene under aktiv rute
+        finnRute2(plass, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass]))
+        finnRute2(plass+1, rad+1, verdi + pyramide[rad][plass], plassering.concat([plass + 1]))
     }
 }
 
@@ -96,36 +118,50 @@ function finnBesteSti(rad, index){
     return sum
 }
 
+// Lager pyramide i js og css
 function lagPyramide(start, slutt, rader) {
+    // Gjentar for antall rader
     for (let i = 1; i <= rader; i++) {
+        // Oppretter liste for rad
         let rad_liste = []
-        let rad_plass_liste = []
-        let rad_sum_liste = []
+        let rad_plass_liste = [] // Liste med plasseringer som brukes i finnRute2
+        let rad_sum_liste = []  // Liste med summer som brukes i finnRute2
+        // Lager rad-element på nettsiden
         let rad = document.createElement("div")
         rad.setAttribute("class", "pyramiderad")
+        // Gjentar for antall ruter i rad
         for (let j = 0; j < i; j++) {
+            // Finner tilfeldig tall innenfor intervall
             let tall = Math.floor(Math.random()*(slutt-start + 1)+start)
+            // Lager rute
             let rute = document.createElement("div")
             rute.innerText = tall
             rute.setAttribute("class", "tallrute")
+            // Gjør rutene mindre om antall rader er mer enn 10
             if (antall_rader > 10) {
                 rute.style.height = "20px"
                 rute.style.width = "20px"
                 rute.style.fontSize = "13px"
             }
+            // Legger til rute i rad
             rad_liste.push(tall)
             rad.appendChild(rute)
+            // Legger til place-holder elementer i plass- og sumlistene til finnRute2
             if (i != rader) {
                 rad_plass_liste.push([])
                 rad_sum_liste.push(0)
             } else {
+                // Fyller bunnrad med samme rader som i original liste
                 rad_plass_liste.push(j)
+                // Fyller siste rad med egne index-er
                 rad_sum_liste.push(tall)
             }
         }
+        // Legger til fylte lister inn i hovedlister
         plassPyramide.push(rad_plass_liste)
         sumPyramide.push(rad_sum_liste)
         pyramide.push(rad_liste)
+        // Legger til rad-element i pyramide-element
         pyramideEl.appendChild(rad)
     }
 }
@@ -171,11 +207,12 @@ function byttSøk(e) {
     }
 }
 
+// Sammenlikner verdier
 function sorterTall(a, b) {
     return a-b;
 }
 
-
+// 
 let startverdier_i_intervall;
 let sluttverdier_i_intervall;
 let antall_i_intervall;
