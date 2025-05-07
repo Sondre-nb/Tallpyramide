@@ -19,6 +19,7 @@
 }
 #main-container a:hover {
     background-color: #F7AAAC;
+    padding-left: 10px;
 }
 
 /* Den store pyramiden i midten av skjermen */

@@ -8,9 +8,6 @@ let sumPyramide = [];   // Lagrer summer oppover
 let plassPyramide = []; // Lagrer plassering med høyest verdi oppover
 let pyramideEl = document.querySelector("#pyramide");   // Pyramide
 
-let hastighet_liste = []
-let iterasjonsliste = []
-
 // Rekursiv funksjon som sjekker alle muligheter
 // Brukes ikke direkte i koden for å sammenlikne, men brukes til å finne plasseringer for høyeste og laveste rute, og til å finne alle summer
 // Plass: plassering til rute som sjekkes
@@ -334,9 +331,8 @@ function fraRGBListeTilHex(rgb){
     return hex
 }
 
-
-function luminesens([r, g, b]) { // Magisk lumeninesens-utregning hentet fra nettet
-    return (0.299 * r + 0.587 * g + 0.114 * b)/255
+function luminesens(rgb) { // Magisk lumeninesens-utregning hentet fra nettet
+    return (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2])/255
 }
 
 function forskjellLumin(rgb1, rgb2) {
@@ -374,8 +370,9 @@ let tekstfargeRiktigeRuter = fraRGBListeTilHex(finnBesteFargeTilfeldig(farge_som
 
 let minsteVerdi = antall_rader * intervall_topp
 
+// Lager pyramiden
 lagPyramide(intervall_bunn,intervall_topp,antall_rader)
-// finnRute2(0,0,0,[0])
+// Finner den beste ruten og lagrer veien
 finnRute(0,0,0,[0])
 
 
@@ -393,6 +390,7 @@ for (let i = 0; i < søkKnapperEl.length; i++) {
     søkKnapperEl[i].addEventListener("change", byttSøk);
 }
 
+// Fargelegger de riktige rutene ved animasjon
 fargelegg(plasseringer)
 
 lagSektordiagram()
@@ -403,7 +401,7 @@ let bitfarger = [
   "#ECE4B7",
   "#5B9A74"
 ];
-
+// Kakediagram over fordelingen av verdier de forskjellige stiene får
 new Chart("sumfordelingsdiagram", {
   type: "pie",
   data: {
@@ -474,6 +472,7 @@ iterasjoner.push(iterasjoner_sum_oppover)
 let x_verdier = ["Rekursiv", "Julie-metoden", "Sum oppover"];
 let stolpefarger = ["#9467CB", "#6DB1BF","#ECE4B7"];
 
+// Stolpediagram for hastighet
 new Chart("hastighet-diagram", {
   type: "bar",
   data: {
@@ -498,6 +497,7 @@ new Chart("hastighet-diagram", {
     }
   }
 });
+// Stoplediagram over iterasjoner
 new Chart("iterasjon-diagram", {
     type: "bar",
     data: {
@@ -521,19 +521,4 @@ new Chart("iterasjon-diagram", {
             }]
         }
     }
-  });
-
-let til_start_knapp = document.querySelector("#tilbake")
-let til_algoritmer_knapp = document.querySelector("#mer-om-algoritme")
-
-function tekstHover(e) {
-    e.target.style.paddingLeft = "10px"
-}
-function tekstIkkeHover(e) {
-    e.target.style.paddingLeft = "5px"
-}
-
-til_start_knapp.addEventListener("mouseover", tekstHover)
-til_start_knapp.addEventListener("mouseout", tekstIkkeHover)
-til_algoritmer_knapp.addEventListener("mouseover", tekstHover)
-til_algoritmer_knapp.addEventListener("mouseout", tekstIkkeHover)
+});
