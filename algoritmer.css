@@ -1,5 +1,5 @@
 /* Flex og padding i hovedområde */
-main{
+main {
     padding-top: 105px; /* 80px for header + 25px for plass over boksene med info */
     padding-bottom: 25px; /* 25px for plass under boksene */
     background-color: #FFEAEC;
@@ -7,12 +7,12 @@ main{
     flex-direction: column;
 }
 
-h2{
+h2 {
     padding: 5px;
 }
 
 /* Algoritme-animasjon containeren*/
-main > div{
+main > div {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-inline: 50px;
@@ -22,7 +22,7 @@ main > div{
 
 
 /* Algoritme-animasjon, gjenbrukt container */
-.algoritme-animasjon{
+.algoritme-animasjon {
     height: 300px;
     display: flex;
     justify-content: right;
@@ -50,7 +50,7 @@ main > div{
     padding: 10px;
 }
 
-.pyramide-til-algoritme-animasjon{
+.pyramide-til-algoritme-animasjon {
     display: flex;
     flex-direction: row;
     align-items: center;
