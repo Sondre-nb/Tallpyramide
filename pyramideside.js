@@ -231,35 +231,45 @@ function lagSektordiagram() {
     summer.sort(sorterTall)
     // Inndelinger i diagram
     let antall_inndelinger = 4;
+    // Finner differanse mellom største og laveste sum
     let differanse = summer[summer.length-1] - summer[0]
+    // Minker antall inndelinger om det er for få summer eller for liten differanse
     if (summer.length < antall_inndelinger) {
         antall_inndelinger = summer.length
     }
     if (differanse < antall_inndelinger) {
         antall_inndelinger = differanse + 1
     }
+    // Finner rest
     let rest = (differanse+1) % antall_inndelinger
+    // Finner intervall for hver seksjon i diagram
     let intervall = (differanse+1 - rest) / antall_inndelinger
     let startverdier_i_intervall = []
     let sluttverdier_i_intervall = []
+    // Oppretter liste med 0-ere tilsvarende like mange elementer som antall inndelinger
     antall_i_intervall = Array(antall_inndelinger).fill(0)
     let verdi = summer[0]
+    // Legger til start- og sluttverdier i hver sine lister
     for (let i = 0; i < antall_inndelinger; i++) {
         startverdier_i_intervall.push(verdi)
         verdi += intervall;
+        // Fordeler rest på de første seksjonene
         if (rest > 0) {
             verdi++;
             rest--;
         }
         sluttverdier_i_intervall.push(verdi-1)
+        // Finner navn til inndelingene basert på summene de innholder
         if (startverdier_i_intervall[i] == sluttverdier_i_intervall[i]) {
             navn_kategorier_sektordiagram.push(String(startverdier_i_intervall[i]))
         } else {
             navn_kategorier_sektordiagram.push(String(startverdier_i_intervall[i] + "-" + sluttverdier_i_intervall[i]))
         }
     }
+    // Finner antall ruter som gir en sum innenfor de ulike intervallene
     for (let i = 0; i < summer.length; i++) {
         let plassering = 0;
+        // Finner riktig intervall til sum
         while (summer[i] > sluttverdier_i_intervall[plassering]) {
             plassering++;
         }
