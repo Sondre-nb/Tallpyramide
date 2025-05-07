@@ -16,7 +16,7 @@ let iterasjonsliste = []
 // Plass: plassering til rute som sjekkes
 // Rad: rad til rute
 // Verdi: total sum ned til den ruten
-// Plassering: liste med plasseringene som er gått gjennom 
+// Plassering: liste med plasseringene som er gått gjennom
 function finnRute(plass, rad, verdi, plassering){
     if (rad < pyramide.length - 1) {
         // Finner verdien til hver av rutene under
@@ -52,7 +52,7 @@ function sjekkVerdi(verdi, plassering) {
 // Plass: plassering til rute som sjekkes
 // Rad: rad til rute
 // Verdi: total sum ned til den ruten
-// Plassering: liste med plasseringene som er gått gjennom 
+// Plassering: liste med plasseringene som er gått gjennom
 function finnRute2(plass, rad, verdi, plassering){
     // Teller antall iterasjoner for statistikk
     iterasjoner_julie_metoden++;
@@ -64,7 +64,7 @@ function finnRute2(plass, rad, verdi, plassering){
             sumPyramide[rad][plass] = pyramide[rad][plass] + sumPyramide[rad+1][plass]
             // Oppdaterer tilsvarende rute i plass-pyramide med plasseringene fra største sum under og egen plassering
             plassPyramide[rad][plass] = [plass].concat(plassPyramide[rad+1][plass])
-            // Sjekker om verdien i ruten pluss høyeste sum under er høyrere enn høyeste verdi 
+            // Sjekker om verdien i ruten pluss høyeste sum under er høyrere enn høyeste verdi
             sjekkVerdi(verdi + sumPyramide[rad+1][plass] + pyramide[rad][plass], plassering.concat(plassPyramide[rad+1][plass]))
         } else {
             // Samme som over, men for motsatt rute
@@ -108,8 +108,9 @@ function sumOppover(pyr){
 
 function rekursivt(rad, index){
     // Finner svaret rekursivt
-    // Returnerer den største av de to verdiene under pluss sin egen verdi, som man finner ved ved å
-    // kalle på denne funksjonen helt til man når bunnen av pyramiden, da returneres verdien til ruten
+    // Returnerer sin egen verdi pluss den største av de to verdiene under, som man finner ved
+    // ved å kalle på denne funksjonen med indexene til de to under helt til man når bunnen av
+    // pyramiden, da returneres verdien ruten har
     iterasjoner_rekursiv++;
     let sum = pyramide[rad][index]
     if (rad < pyramide.length - 1){
