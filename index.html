@@ -19,27 +19,32 @@
             <h2>Instillinger</h2>
             <div id="alternativer">
                 <div>
+                    <!-- Start-verdi-slider -->
                     <label for="start-slider">Start</label>
                     <input type="range" min="1" max="98" id="start-slider" value="1">
                     <p id="display-verdi-start">Verdi til slider</p>
                 </div>
                 <div>
-                    <!-- Legg på eventListener som gjør at man ikke kan ha laere slutt enn start -->
+                    <!-- Slutt-verdi-slider -->
                     <label for="slutt-slider">Slutt</label>
                     <input type="range" min="2" max="99" id="slutt-slider" value="50">
                     <p id="display-verdi-slutt">Verdi til slider</p>
                 </div>
                 <div>
+                    <!-- Rad-slider -->
                     <label for="rader-slider">Rader</label>
                     <input type="range" min="2" max="15" id="rader-slider">
                     <p id="display-verdi-rader">Verdi til slider</p>
                 </div>
                 <div>
+                    <!-- Farge-input -->
                     <label for="farge-velger">Farge</label>
                     <input type="color" value="#abcdef" id="farge-velger">
                 </div>
             </div>
+            <!-- Tekst legges til om sluttverdi er lavere enn startverdi -->
             <p id="feil-tekst"></p>
+            <!-- Start-knapp -->
             <button id="start-knapp">Start</button>
         </div>
     </main>

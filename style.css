@@ -72,6 +72,7 @@ header h1 {
     align-items: center;
 }
 
+/* Hoved-pyramide */
 #pyramide {
     display: flex;
     flex-direction: column;

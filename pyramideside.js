@@ -199,6 +199,7 @@ function fargelegg(plasseringer) {
     }
 }
 
+// Bytter mellom å vise høyeste og laveste sum
 function byttSøk(e) {
     let ruter = document.querySelectorAll(".tallrute")
     for (let i = 0; i < ruter.length; i++) {
@@ -378,6 +379,7 @@ let farge_som_rgb = fraHexTilRGBListe(farge)
 // Velger passende tekstfarge til rutene som skal endre farge (baseres på brukerens farge)
 let tekstfargeRiktigeRuter = fraRGBListeTilHex(finnBesteFargeTilfeldig(farge_som_rgb))
 
+// Setter minste verdi til høyest mulig for å unngå å velge for liten startverdi når man finner minste sum
 let minsteVerdi = antall_rader * intervall_topp
 
 // Lager pyramiden
@@ -385,7 +387,7 @@ lagPyramide(intervall_bunn,intervall_topp,antall_rader)
 // Finner den beste ruten og lagrer veien
 finnRute(0,0,0,[0])
 
-
+// Legger til tekst i statistikk-boks
 let mulighet_tekst = document.querySelector("#antall-muligheter")
 mulighet_tekst.innerText += " " + 2**(antall_rader-1)
 
@@ -395,6 +397,7 @@ høyeste_sum_tekst.innerText += " " + høyesteVerdi
 let laveste_sum_tekst = document.querySelector("#laveste-sum")
 laveste_sum_tekst.innerText += " " + minsteVerdi
 
+// Sjekker om knapp som endrer mellom høyeste og laveste verdi blir trykket
 let søkKnapperEl = document.querySelectorAll(".søk-instilling-knapp")
 for (let i = 0; i < søkKnapperEl.length; i++) {
     søkKnapperEl[i].addEventListener("change", byttSøk);
@@ -403,14 +406,17 @@ for (let i = 0; i < søkKnapperEl.length; i++) {
 // Fargelegger de riktige rutene ved animasjon
 fargelegg(plasseringer)
 
+// Finner verdier til sektordiagram
 lagSektordiagram()
 
+// Farger i sektordiagram
 let bitfarger = [
   "#9467CB",
   "#6DB1BF",
   "#ECE4B7",
   "#5B9A74"
 ];
+
 // Kakediagram over fordelingen av verdier de forskjellige stiene får
 new Chart("sumfordelingsdiagram", {
   type: "pie",
@@ -501,13 +507,14 @@ new Chart("hastighet-diagram", {
     scales: {
         yAxes: [{
             ticks: {
-                beginAtZero: true
+                beginAtZero: true // Gjør at y-aksen starter fra null
             }
         }]
     }
   }
 });
-// Stoplediagram over iterasjoner
+
+// Stolpediagram over iterasjoner
 new Chart("iterasjon-diagram", {
     type: "bar",
     data: {
