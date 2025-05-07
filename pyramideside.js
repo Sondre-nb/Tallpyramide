@@ -220,14 +220,15 @@ function sorterTall(a, b) {
     return a-b;
 }
 
-// 
-let startverdier_i_intervall;
-let sluttverdier_i_intervall;
+// Definerer navn og antall tall per inndeling til sektordiagram
 let antall_i_intervall;
 let navn_kategorier_sektordiagram = [];
 
+// Finner data til sektordiagram
 function lagSektordiagram() {
+    // Sorterer liste med antall mulige summer man kan få i pyramiden
     summer.sort(sorterTall)
+    // Inndelinger i diagram
     let antall_inndelinger = 4;
     let differanse = summer[summer.length-1] - summer[0]
     if (summer.length < antall_inndelinger) {
@@ -238,8 +239,8 @@ function lagSektordiagram() {
     }
     let rest = (differanse+1) % antall_inndelinger
     let intervall = (differanse+1 - rest) / antall_inndelinger
-    startverdier_i_intervall = []
-    sluttverdier_i_intervall = []
+    let startverdier_i_intervall = []
+    let sluttverdier_i_intervall = []
     antall_i_intervall = Array(antall_inndelinger).fill(0)
     let verdi = summer[0]
     for (let i = 0; i < antall_inndelinger; i++) {
