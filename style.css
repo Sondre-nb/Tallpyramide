@@ -60,6 +60,9 @@ header h1 {
     background-color: #e5da99;
     transform: scaleX(1.05);
 }
+#tilbake-knapp:focus {
+    transform: scaleX(1.1);
+}
 
 /* Rutene inne i pyramidene */
 .tallrute {
